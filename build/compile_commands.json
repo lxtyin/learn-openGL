@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\main.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\main.cpp",
+  "file": "C:/Users/86186/Desktop/openGL/main.cpp"
+},
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\src\\Shader.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\Shader.cpp",
+  "file": "C:/Users/86186/Desktop/openGL/src/Shader.cpp"
+},
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\src\\Texture.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\Texture.cpp",
+  "file": "C:/Users/86186/Desktop/openGL/src/Texture.cpp"
+},
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\src\\Transform.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\Transform.cpp",
+  "file": "C:/Users/86186/Desktop/openGL/src/Transform.cpp"
+},
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\gcc.exe  @CMakeFiles/openGL.dir/includes_C.rsp -g -o CMakeFiles\\openGL.dir\\src\\glad.c.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\glad.c",
+  "file": "C:/Users/86186/Desktop/openGL/src/glad.c"
+},
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\src\\stb_image.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\stb_image.cpp",
+  "file": "C:/Users/86186/Desktop/openGL/src/stb_image.cpp"
+}
+]
