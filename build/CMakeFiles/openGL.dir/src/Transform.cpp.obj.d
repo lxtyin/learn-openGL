@@ -1,20 +1,7 @@
 CMakeFiles/openGL.dir/src/Transform.cpp.obj: \
  C:\Users\86186\Desktop\openGL\src\Transform.cpp \
  C:/Users/86186/Desktop/openGL/include/Transform.h \
- C:/Users/86186/Desktop/openGL/include/glad/glad.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/KHR/khrplatform.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/stdint.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/stddef.h \
- D:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
- C:/Users/86186/Desktop/openGL/include/glfw/glfw3.h \
+ C:/Users/86186/Desktop/openGL/include/exglm.hpp \
  C:/Users/86186/Desktop/openGL/include/glm/glm.hpp \
  C:/Users/86186/Desktop/openGL/include/glm/detail/_fixes.hpp \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cmath \
@@ -25,6 +12,13 @@ CMakeFiles/openGL.dir/src/Transform.cpp.obj: \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/cpp_type_traits.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ext/type_traits.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/std_abs.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/stdlib.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
@@ -71,8 +65,12 @@ CMakeFiles/openGL.dir/src/Transform.cpp.obj: \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/assert.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstdlib \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstddef \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/stddef.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
  C:/Users/86186/Desktop/openGL/include/glm/simd/platform.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstdint \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/stdint.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/climits \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cfloat \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/float.h \
@@ -259,4 +257,7 @@ CMakeFiles/openGL.dir/src/Transform.cpp.obj: \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstring \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:/Users/86186/Desktop/openGL/include/glm/gtc/type_ptr.inl
+ C:/Users/86186/Desktop/openGL/include/glm/gtc/type_ptr.inl \
+ C:/Users/86186/Desktop/openGL/include/glad/glad.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/KHR/khrplatform.h \
+ C:/Users/86186/Desktop/openGL/include/glfw/glfw3.h

@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Gobject.obj: src/Gobject.cpp.obj
+.PHONY : src/Gobject.obj
+
+# target to build an object file
+src/Gobject.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Gobject.cpp.obj
+.PHONY : src/Gobject.cpp.obj
+
+src/Gobject.i: src/Gobject.cpp.i
+.PHONY : src/Gobject.i
+
+# target to preprocess a source file
+src/Gobject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Gobject.cpp.i
+.PHONY : src/Gobject.cpp.i
+
+src/Gobject.s: src/Gobject.cpp.s
+.PHONY : src/Gobject.s
+
+# target to generate assembly for a file
+src/Gobject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Gobject.cpp.s
+.PHONY : src/Gobject.cpp.s
+
 src/Shader.obj: src/Shader.cpp.obj
 .PHONY : src/Shader.obj
 
@@ -284,6 +308,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Gobject.obj
+	@echo ... src/Gobject.i
+	@echo ... src/Gobject.s
 	@echo ... src/Shader.obj
 	@echo ... src/Shader.i
 	@echo ... src/Shader.s

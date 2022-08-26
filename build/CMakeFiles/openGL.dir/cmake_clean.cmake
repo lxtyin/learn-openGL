@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/openGL.dir/main.cpp.obj"
   "CMakeFiles/openGL.dir/main.cpp.obj.d"
+  "CMakeFiles/openGL.dir/src/Gobject.cpp.obj"
+  "CMakeFiles/openGL.dir/src/Gobject.cpp.obj.d"
   "CMakeFiles/openGL.dir/src/Shader.cpp.obj"
   "CMakeFiles/openGL.dir/src/Shader.cpp.obj.d"
   "CMakeFiles/openGL.dir/src/Texture.cpp.obj"

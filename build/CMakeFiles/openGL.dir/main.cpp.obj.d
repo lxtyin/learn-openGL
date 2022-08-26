@@ -332,7 +332,7 @@ CMakeFiles/openGL.dir/main.cpp.obj: \
  C:/Users/86186/Desktop/openGL/include/glad/glad.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/KHR/khrplatform.h \
  C:/Users/86186/Desktop/openGL/include/glfw/glfw3.h \
- C:/Users/86186/Desktop/openGL/include/shader.h \
+ C:/Users/86186/Desktop/openGL/include/Shader.h \
  C:/Users/86186/Desktop/openGL/include/glm/glm.hpp \
  C:/Users/86186/Desktop/openGL/include/glm/detail/_fixes.hpp \
  C:/Users/86186/Desktop/openGL/include/glm/detail/setup.hpp \
@@ -521,4 +521,5 @@ CMakeFiles/openGL.dir/main.cpp.obj: \
  C:/Users/86186/Desktop/openGL/include/glfw/glfw3.h \
  C:/Users/86186/Desktop/openGL/include/Texture.h \
  C:/Users/86186/Desktop/openGL/include/stb_image.h \
- C:/Users/86186/Desktop/openGL/include/Transform.h
+ C:/Users/86186/Desktop/openGL/include/Transform.h \
+ C:/Users/86186/Desktop/openGL/include/exglm.hpp

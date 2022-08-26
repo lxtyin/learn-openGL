@@ -1,1 +1,1 @@
-CMakeFiles/openGL.dir/main.cpp.obj CMakeFiles/openGL.dir/src/Shader.cpp.obj CMakeFiles/openGL.dir/src/Texture.cpp.obj CMakeFiles/openGL.dir/src/Transform.cpp.obj CMakeFiles/openGL.dir/src/glad.c.obj CMakeFiles/openGL.dir/src/stb_image.cpp.obj
+CMakeFiles/openGL.dir/main.cpp.obj CMakeFiles/openGL.dir/src/Gobject.cpp.obj CMakeFiles/openGL.dir/src/Shader.cpp.obj CMakeFiles/openGL.dir/src/Texture.cpp.obj CMakeFiles/openGL.dir/src/Transform.cpp.obj CMakeFiles/openGL.dir/src/glad.c.obj CMakeFiles/openGL.dir/src/stb_image.cpp.obj

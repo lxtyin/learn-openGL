@@ -1,12 +1,9 @@
 #include <bits/stdc++.h>
 #include "glad/glad.h"
 #include "glfw/glfw3.h"
-#include "shader.h"
+#include "Shader.h"
 #include "Texture.h"
 #include "Transform.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 using namespace std;
 
 double lastTime, detaTime = 0;
@@ -23,8 +20,10 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height){
 
 //鼠标移动回调函数
 double lastX = 400, lastY = 400;
-void mouse_callback(GLFWwindow* window, double xpos, double ypos){
-    viewTrans.rotate((float)((xpos - lastX) * detaTime), 0, -1, 0, WORLD_SPACE);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+    //这里应该是 以自身为中心，按世界的y轴旋转，故在自身坐标系下表示世界y轴
+    glm::vec3 hvec = glm::inverse(viewTrans.transform) * glm::vec4(0, -1, 0, 0);
+    viewTrans.rotate((float)((xpos - lastX) * detaTime) * 0.7, hvec);
     
     viewTrans.rotate((float)((ypos - lastY) * detaTime), -1, 0, 0);
     lastX = xpos;
@@ -39,6 +38,7 @@ void processInput(GLFWwindow *window){
     if(glfwGetKey(window, GLFW_KEY_A)) viewTrans.translate(-4 * detaTime, 0, 0);
     if(glfwGetKey(window, GLFW_KEY_SPACE)) viewTrans.translate(0, 4 * detaTime, 0, WORLD_SPACE);
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) viewTrans.translate(0, -4 * detaTime, 0, WORLD_SPACE);
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
 int main(int argc, const char * argv[]) {
@@ -132,7 +132,7 @@ int main(int argc, const char * argv[]) {
     //这里最好先解除VAO的绑定，再解绑VBO和EBO，先解除VBO好像也对，但先解绑EBO就不对了（暂不理解VAO记录了些什么
     glBindVertexArray(0);//unbind VAO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
 
     Texture img1("../pic/wood.png");
     img1.activeTarget(0);
@@ -140,9 +140,9 @@ int main(int argc, const char * argv[]) {
     //编译，连接写好的shader，得到shaderProgram
     Shader myshader("../shader/myshader.vs", "../shader/myshader.fs");
 
-    objTrans.translate(0, 0, -1);
-    while(!glfwWindowShouldClose(window)){
-
+    objTrans.translate(0, -4, 0);
+    while(!glfwWindowShouldClose(window)) {
+        
         //渲染部分
         //将颜色缓冲clear，即变成背景颜色
         //将深度缓冲clear，删掉前一帧的深度信息
@@ -153,9 +153,9 @@ int main(int argc, const char * argv[]) {
 
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
                                                 1.0f * screenWidth / screenHeight, 0.1f, 100.0f);
-        myshader.setMatrix4("projection", projection);
-        myshader.setMatrix4("view", glm::inverse(viewTrans.transmat()));
-        myshader.setMatrix4("transform", objTrans.transmat());
+        myshader.setMat4("model", objTrans.transform);
+        myshader.setMat4("view", glm::inverse(viewTrans.transform));
+        myshader.setMat4("projection", projection);
 
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);

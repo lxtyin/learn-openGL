@@ -4,6 +4,7 @@ project(openGL)
 file(GLOB SRC_FILES
         ${PROJECT_SOURCE_DIR}/main.cpp
         ${PROJECT_SOURCE_DIR}/include/*.h
+        ${PROJECT_SOURCE_DIR}/include/*.hpp
         ${PROJECT_SOURCE_DIR}/include/glfw/*.h
         ${PROJECT_SOURCE_DIR}/include/glad/*.h
         ${PROJECT_SOURCE_DIR}/include/glm/*.h

@@ -13,8 +13,9 @@ public:
     Shader(const char *vertexShaderPath, const char *fragmentShaderSource);
     void use();
     void setFloat(const char *name, float value);
-    void setInt(const char *name, int value);
-    void setMatrix4(const char *name, glm::mat4 value, int T = GL_FALSE);
+    void setInt(const char* name, int value);
+    void setVec3(const char* name, glm::vec3 value);
+    void setMat4(const char* name, glm::mat4 value, int T = GL_FALSE);
 };
 
 #endif

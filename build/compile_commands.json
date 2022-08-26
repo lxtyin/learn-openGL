@@ -6,6 +6,11 @@
 },
 {
   "directory": "C:/Users/86186/Desktop/openGL/build",
+  "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\src\\Gobject.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\Gobject.cpp",
+  "file": "C:/Users/86186/Desktop/openGL/src/Gobject.cpp"
+},
+{
+  "directory": "C:/Users/86186/Desktop/openGL/build",
   "command": "D:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/openGL.dir/includes_CXX.rsp -g -o CMakeFiles\\openGL.dir\\src\\Shader.cpp.obj -c C:\\Users\\86186\\Desktop\\openGL\\src\\Shader.cpp",
   "file": "C:/Users/86186/Desktop/openGL/src/Shader.cpp"
 },
