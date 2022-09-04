@@ -4,7 +4,7 @@
 #include <sstream>
 using namespace std;
 
-Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath) {
+Shader::Shader(const string& vertexShaderPath, const string& fragmentShaderPath) {
     ifstream vin, fin;
     string vertexString, fragmentString;
     //这两行确保ifstream能抛出异常
@@ -69,19 +69,19 @@ void Shader::use() {
     glUseProgram(shaderProgram);
 }
 
-void Shader::setFloat(const char* name, float value) {
-    glUniform1f(glGetUniformLocation(shaderProgram, name), value);
+void Shader::setFloat(const string& name, float value) {
+    glUniform1f(glGetUniformLocation(shaderProgram, name.c_str()), value);
 }
 
-void Shader::setInt(const char* name, int value) {
-    glUniform1i(glGetUniformLocation(shaderProgram, name), value);
+void Shader::setInt(const string& name, int value) {
+    glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
 }
 
 
-void Shader::setVec3(const char* name, glm::vec3 value) {
-    glUniform3fv(glGetUniformLocation(shaderProgram, name), 1, glm::value_ptr(value));
+void Shader::setVec3(const string& name, glm::vec3 value) {
+    glUniform3fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, glm::value_ptr(value));
 }
 
-void Shader::setMat4(const char* name, glm::mat4 value, int T) {
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name), 1, T, glm::value_ptr(value));
+void Shader::setMat4(const string& name, glm::mat4 value, int T) {
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, T, glm::value_ptr(value));
 }

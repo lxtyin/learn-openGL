@@ -260,12 +260,10 @@ CMakeFiles/openGL.dir/src/Shader.cpp.obj: \
  C:/Users/86186/Desktop/openGL/include/glad/glad.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/KHR/khrplatform.h \
  C:/Users/86186/Desktop/openGL/include/glfw/glfw3.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/iostream \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ostream \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ios \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/iosfwd \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/string \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/stringfwd.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/memoryfwd.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/char_traits.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/postypes.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cwchar \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/wchar.h \
@@ -274,33 +272,20 @@ CMakeFiles/openGL.dir/src/Shader.cpp.obj: \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stat64.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/exception \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/exception.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/exception_ptr.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/cxxabi_init_exception.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/typeinfo \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/hash_bytes.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/allocator.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/new_allocator.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/new \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/nested_exception.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/char_traits.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/exception.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/localefwd.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/clocale \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/locale.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/stdio.h \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/iosfwd \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cctype \
  D:/MinGW/mingw64/x86_64-w64-mingw32/include/ctype.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/ios_base.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ext/atomicity.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_classes.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/string \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/allocator.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/new_allocator.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/ostream_insert.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/cxxabi_forced.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/stl_function.h \
@@ -310,17 +295,32 @@ CMakeFiles/openGL.dir/src/Shader.cpp.obj: \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/range_access.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/initializer_list \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/basic_string.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ext/atomicity.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ext/alloc_traits.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/alloc_traits.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/stl_construct.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/string_view \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/functional_hash.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/hash_bytes.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/string_view.tcc \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ext/string_conversions.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstdio \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cerrno \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/charconv.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/basic_string.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/iostream \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ostream \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ios \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/exception \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/exception_ptr.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/cxxabi_init_exception.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/typeinfo \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/nested_exception.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/ios_base.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_classes.h \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_classes.tcc \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/system_error \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \

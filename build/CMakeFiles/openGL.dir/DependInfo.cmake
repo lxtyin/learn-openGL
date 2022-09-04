@@ -10,7 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/86186/Desktop/openGL/src/glad.c" "CMakeFiles/openGL.dir/src/glad.c.obj" "gcc" "CMakeFiles/openGL.dir/src/glad.c.obj.d"
   "C:/Users/86186/Desktop/openGL/main.cpp" "CMakeFiles/openGL.dir/main.cpp.obj" "gcc" "CMakeFiles/openGL.dir/main.cpp.obj.d"
-  "C:/Users/86186/Desktop/openGL/src/Gobject.cpp" "CMakeFiles/openGL.dir/src/Gobject.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Gobject.cpp.obj.d"
+  "C:/Users/86186/Desktop/openGL/src/Light.cpp" "CMakeFiles/openGL.dir/src/Light.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Light.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Shader.cpp" "CMakeFiles/openGL.dir/src/Shader.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Shader.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Texture.cpp" "CMakeFiles/openGL.dir/src/Texture.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Texture.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Transform.cpp" "CMakeFiles/openGL.dir/src/Transform.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Transform.cpp.obj.d"

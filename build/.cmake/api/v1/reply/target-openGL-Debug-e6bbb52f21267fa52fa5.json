@@ -142,7 +142,17 @@
 				"role" : "libraries"
 			},
 			{
+				"backtrace" : 3,
+				"fragment" : "-lzlibstatic",
+				"role" : "libraries"
+			},
+			{
 				"fragment" : "-Wl,-Bdynamic",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lassimp",
 				"role" : "libraries"
 			},
 			{
@@ -218,7 +228,7 @@
 	[
 		{
 			"backtrace" : 1,
-			"path" : "include/Gobject.h",
+			"path" : "include/Light.h",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -390,7 +400,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/Gobject.cpp",
+			"path" : "src/Light.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{

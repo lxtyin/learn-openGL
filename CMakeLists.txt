@@ -18,4 +18,4 @@ include_directories(include)
 link_directories(lib)
 add_executable(openGL ${SRC_FILES})
 
-target_link_libraries(openGL gdi32 libglfw3.a)
+target_link_libraries(openGL gdi32 libglfw3.a libzlibstatic.a libassimp.dll.a)

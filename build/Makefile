@@ -152,29 +152,29 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/Gobject.obj: src/Gobject.cpp.obj
-.PHONY : src/Gobject.obj
+src/Light.obj: src/Light.cpp.obj
+.PHONY : src/Light.obj
 
 # target to build an object file
-src/Gobject.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Gobject.cpp.obj
-.PHONY : src/Gobject.cpp.obj
+src/Light.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Light.cpp.obj
+.PHONY : src/Light.cpp.obj
 
-src/Gobject.i: src/Gobject.cpp.i
-.PHONY : src/Gobject.i
+src/Light.i: src/Light.cpp.i
+.PHONY : src/Light.i
 
 # target to preprocess a source file
-src/Gobject.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Gobject.cpp.i
-.PHONY : src/Gobject.cpp.i
+src/Light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Light.cpp.i
+.PHONY : src/Light.cpp.i
 
-src/Gobject.s: src/Gobject.cpp.s
-.PHONY : src/Gobject.s
+src/Light.s: src/Light.cpp.s
+.PHONY : src/Light.s
 
 # target to generate assembly for a file
-src/Gobject.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Gobject.cpp.s
-.PHONY : src/Gobject.cpp.s
+src/Light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Light.cpp.s
+.PHONY : src/Light.cpp.s
 
 src/Shader.obj: src/Shader.cpp.obj
 .PHONY : src/Shader.obj
@@ -308,9 +308,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... src/Gobject.obj
-	@echo ... src/Gobject.i
-	@echo ... src/Gobject.s
+	@echo ... src/Light.obj
+	@echo ... src/Light.i
+	@echo ... src/Light.s
 	@echo ... src/Shader.obj
 	@echo ... src/Shader.i
 	@echo ... src/Shader.s

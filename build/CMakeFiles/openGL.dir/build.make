@@ -83,20 +83,20 @@ CMakeFiles/openGL.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openGL.dir/main.cpp.s"
 	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86186\Desktop\openGL\main.cpp -o CMakeFiles\openGL.dir\main.cpp.s
 
-CMakeFiles/openGL.dir/src/Gobject.cpp.obj: CMakeFiles/openGL.dir/flags.make
-CMakeFiles/openGL.dir/src/Gobject.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
-CMakeFiles/openGL.dir/src/Gobject.cpp.obj: C:/Users/86186/Desktop/openGL/src/Gobject.cpp
-CMakeFiles/openGL.dir/src/Gobject.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/openGL.dir/src/Gobject.cpp.obj"
-	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/Gobject.cpp.obj -MF CMakeFiles\openGL.dir\src\Gobject.cpp.obj.d -o CMakeFiles\openGL.dir\src\Gobject.cpp.obj -c C:\Users\86186\Desktop\openGL\src\Gobject.cpp
+CMakeFiles/openGL.dir/src/Light.cpp.obj: CMakeFiles/openGL.dir/flags.make
+CMakeFiles/openGL.dir/src/Light.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
+CMakeFiles/openGL.dir/src/Light.cpp.obj: C:/Users/86186/Desktop/openGL/src/Light.cpp
+CMakeFiles/openGL.dir/src/Light.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/openGL.dir/src/Light.cpp.obj"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/Light.cpp.obj -MF CMakeFiles\openGL.dir\src\Light.cpp.obj.d -o CMakeFiles\openGL.dir\src\Light.cpp.obj -c C:\Users\86186\Desktop\openGL\src\Light.cpp
 
-CMakeFiles/openGL.dir/src/Gobject.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/openGL.dir/src/Gobject.cpp.i"
-	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86186\Desktop\openGL\src\Gobject.cpp > CMakeFiles\openGL.dir\src\Gobject.cpp.i
+CMakeFiles/openGL.dir/src/Light.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/openGL.dir/src/Light.cpp.i"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86186\Desktop\openGL\src\Light.cpp > CMakeFiles\openGL.dir\src\Light.cpp.i
 
-CMakeFiles/openGL.dir/src/Gobject.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openGL.dir/src/Gobject.cpp.s"
-	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86186\Desktop\openGL\src\Gobject.cpp -o CMakeFiles\openGL.dir\src\Gobject.cpp.s
+CMakeFiles/openGL.dir/src/Light.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openGL.dir/src/Light.cpp.s"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86186\Desktop\openGL\src\Light.cpp -o CMakeFiles\openGL.dir\src\Light.cpp.s
 
 CMakeFiles/openGL.dir/src/Shader.cpp.obj: CMakeFiles/openGL.dir/flags.make
 CMakeFiles/openGL.dir/src/Shader.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
@@ -176,7 +176,7 @@ CMakeFiles/openGL.dir/src/stb_image.cpp.s: cmake_force
 # Object files for target openGL
 openGL_OBJECTS = \
 "CMakeFiles/openGL.dir/main.cpp.obj" \
-"CMakeFiles/openGL.dir/src/Gobject.cpp.obj" \
+"CMakeFiles/openGL.dir/src/Light.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Shader.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Texture.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Transform.cpp.obj" \
@@ -187,7 +187,7 @@ openGL_OBJECTS = \
 openGL_EXTERNAL_OBJECTS =
 
 openGL.exe: CMakeFiles/openGL.dir/main.cpp.obj
-openGL.exe: CMakeFiles/openGL.dir/src/Gobject.cpp.obj
+openGL.exe: CMakeFiles/openGL.dir/src/Light.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Shader.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Texture.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Transform.cpp.obj
