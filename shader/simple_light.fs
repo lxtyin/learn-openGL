@@ -10,7 +10,7 @@ uniform vec3 viewPos; //观察者位置
 //物体材质，反映物体本身性质
 struct Material{
     sampler2D diffuse; // 漫反射颜色 = 环境光颜色 = 物体本身颜色，强度差别取决于光照设定
-    sampler2D specular;   // 镜面反射颜色，通常为一定比例的白色
+    sampler2D specular;   // 镜面反射颜色，通常为一定比例的白色/高光贴图
     float spininess; // 反光度
 };
 uniform Material material;

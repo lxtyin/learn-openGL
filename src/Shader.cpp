@@ -77,7 +77,6 @@ void Shader::setInt(const string& name, int value) {
     glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
 }
 
-
 void Shader::setVec3(const string& name, glm::vec3 value) {
     glUniform3fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, glm::value_ptr(value));
 }

@@ -313,4 +313,44 @@ CMakeFiles/openGL.dir/src/Light.cpp.obj: \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstdio \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cerrno \
  D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/charconv.h \
- D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/basic_string.tcc
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/basic_string.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/set \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/stl_tree.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ext/aligned_buffer.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/node_handle.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/stl_set.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/stl_multiset.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/erase_if.h \
+ C:/Users/86186/Desktop/openGL/include/tool.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cstdarg \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/stdarg.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/stdarg.h \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/iostream \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ostream \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/ios \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/exception \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/exception_ptr.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/cxxabi_init_exception.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/typeinfo \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/nested_exception.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/ios_base.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_classes.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_classes.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/system_error \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/stdexcept \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/streambuf \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/streambuf.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/basic_ios.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_facets.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/cwctype \
+ D:/MinGW/mingw64/x86_64-w64-mingw32/include/wctype.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/streambuf_iterator.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/locale_facets.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/basic_ios.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/ostream.tcc \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/istream \
+ D:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/12.1.0/include/c++/bits/istream.tcc

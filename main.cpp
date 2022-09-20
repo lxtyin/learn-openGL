@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "Transform.h"
 #include "Light.h"
+#include "tool.h"
 
 using namespace std;
 
@@ -34,7 +35,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 }
 
 //处理按键
-SpotLight light(glm::vec3(0.9765, 1.0, 0.7255), 13, 15);
+SpotLight light(glm::vec3(1, 1, 1), 13, 15);
 void processInput(GLFWwindow *window){
     if(glfwGetKey(window, GLFW_KEY_W)) playerTrans.translate(0, 0, -4 * detaTime);
     if(glfwGetKey(window, GLFW_KEY_S)) playerTrans.translate(0, 0, 4 * detaTime);
@@ -43,14 +44,14 @@ void processInput(GLFWwindow *window){
     if(glfwGetKey(window, GLFW_KEY_SPACE)) playerTrans.translate(0, 4 * detaTime, 0);
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) playerTrans.translate(0, -4 * detaTime, 0);
     if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
-    if(glfwGetKey(window, GLFW_KEY_J)) light.angleIn += 0.1, light.angleOut += 0.1;
-    if(glfwGetKey(window, GLFW_KEY_K)) light.angleIn -= 0.1, light.angleOut -= 0.1;
+    if(glfwGetKey(window, GLFW_KEY_J)) light.angleIn += 0.02, light.angleOut += 0.02;
+    if(glfwGetKey(window, GLFW_KEY_K)) light.angleIn -= 0.02, light.angleOut -= 0.02;
 
     viewTrans.setPosition(playerTrans.position());
 }
 
 int main(int argc, const char * argv[]) {
-
+    
     glfwInit();
     //设置各种选项值
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);//主版本号
@@ -206,7 +207,7 @@ int main(int argc, const char * argv[]) {
 
     light.direction = vec3(0, 0, -1);
     light.decay = vec3(1.0, 0.014, 0.0007);
-    ParallelLight light2(glm::vec3(0, 0, 0));
+    ParallelLight light2(glm::vec3(1, 1, 1));
 
     std::vector<Transform> objs;
     auto rd = []() {return rand() % 6 - 3;};
@@ -225,18 +226,20 @@ int main(int argc, const char * argv[]) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         myshader.use();
-        myshader.setInt("material.diffuse", 0);//uniform sampler2D的值不知道在那一个步骤中会被清掉，每次use都要更新
+        //设置物体本身材质
+        myshader.setInt("material.diffuse", 0);
         myshader.setInt("material.specular", 1);
         myshader.setFloat("material.spininess", 16);
-        
+
+        //传入必要的变换矩阵
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
             1.0f * screenWidth / screenHeight, 0.1f, 100.0f);
         myshader.setMat4("view", glm::inverse(viewTrans.transmat));
         myshader.setMat4("projection", projection);
         myshader.setVec3("viewPos", viewTrans.position());
-        light.apply(myshader, "light[0].");
-        light2.apply(myshader, "light[1].");
-        myshader.setInt("light_N", 2);
+
+        //应用光照
+        Light::applyAllLightTo(myshader);
 
         for(int i = 0;i < 30;i++) {
             myshader.setMat4("model", objs[i].transmat);
@@ -255,8 +258,6 @@ int main(int argc, const char * argv[]) {
 
         detaTime = glfwGetTime() - lastTime;//更新detaTime
         lastTime += detaTime;
-        // light.transform.rotate(detaTime * 3, -1, 0, 1, WORLD_SPACE);
-        
         processInput(window);//处理按键
         glfwSwapBuffers(window); //交换两层颜色缓冲
         glfwPollEvents();//检查有没有发生事件，调用相应回调函数

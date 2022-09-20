@@ -524,4 +524,5 @@ CMakeFiles/openGL.dir/main.cpp.obj: \
  C:/Users/86186/Desktop/openGL/include/Transform.h \
  C:/Users/86186/Desktop/openGL/include/exglm.hpp \
  C:/Users/86186/Desktop/openGL/include/Light.h \
- C:/Users/86186/Desktop/openGL/include/Shader.h
+ C:/Users/86186/Desktop/openGL/include/Shader.h \
+ C:/Users/86186/Desktop/openGL/include/tool.h

@@ -80,12 +80,12 @@
 			},
 			"sourceIndexes" : 
 			[
-				33,
 				34,
 				35,
 				36,
 				37,
-				39
+				38,
+				40
 			]
 		},
 		{
@@ -105,7 +105,7 @@
 			"language" : "C",
 			"sourceIndexes" : 
 			[
-				38
+				39
 			]
 		}
 	],
@@ -142,17 +142,7 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 3,
-				"fragment" : "-lzlibstatic",
-				"role" : "libraries"
-			},
-			{
 				"fragment" : "-Wl,-Bdynamic",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 3,
-				"fragment" : "-lassimp",
 				"role" : "libraries"
 			},
 			{
@@ -207,20 +197,21 @@
 				29,
 				30,
 				31,
-				32
+				32,
+				33
 			]
 		},
 		{
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				33,
 				34,
 				35,
 				36,
 				37,
 				38,
-				39
+				39,
+				40
 			]
 		}
 	],
@@ -389,6 +380,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "include/stb_image.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/tool.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
