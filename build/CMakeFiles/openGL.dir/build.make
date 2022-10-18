@@ -98,11 +98,26 @@ CMakeFiles/openGL.dir/src/Light.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openGL.dir/src/Light.cpp.s"
 	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86186\Desktop\openGL\src\Light.cpp -o CMakeFiles\openGL.dir\src\Light.cpp.s
 
+CMakeFiles/openGL.dir/src/Mesh.cpp.obj: CMakeFiles/openGL.dir/flags.make
+CMakeFiles/openGL.dir/src/Mesh.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
+CMakeFiles/openGL.dir/src/Mesh.cpp.obj: C:/Users/86186/Desktop/openGL/src/Mesh.cpp
+CMakeFiles/openGL.dir/src/Mesh.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/openGL.dir/src/Mesh.cpp.obj"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/Mesh.cpp.obj -MF CMakeFiles\openGL.dir\src\Mesh.cpp.obj.d -o CMakeFiles\openGL.dir\src\Mesh.cpp.obj -c C:\Users\86186\Desktop\openGL\src\Mesh.cpp
+
+CMakeFiles/openGL.dir/src/Mesh.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/openGL.dir/src/Mesh.cpp.i"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86186\Desktop\openGL\src\Mesh.cpp > CMakeFiles\openGL.dir\src\Mesh.cpp.i
+
+CMakeFiles/openGL.dir/src/Mesh.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openGL.dir/src/Mesh.cpp.s"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86186\Desktop\openGL\src\Mesh.cpp -o CMakeFiles\openGL.dir\src\Mesh.cpp.s
+
 CMakeFiles/openGL.dir/src/Shader.cpp.obj: CMakeFiles/openGL.dir/flags.make
 CMakeFiles/openGL.dir/src/Shader.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
 CMakeFiles/openGL.dir/src/Shader.cpp.obj: C:/Users/86186/Desktop/openGL/src/Shader.cpp
 CMakeFiles/openGL.dir/src/Shader.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/openGL.dir/src/Shader.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/openGL.dir/src/Shader.cpp.obj"
 	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/Shader.cpp.obj -MF CMakeFiles\openGL.dir\src\Shader.cpp.obj.d -o CMakeFiles\openGL.dir\src\Shader.cpp.obj -c C:\Users\86186\Desktop\openGL\src\Shader.cpp
 
 CMakeFiles/openGL.dir/src/Shader.cpp.i: cmake_force
@@ -117,7 +132,7 @@ CMakeFiles/openGL.dir/src/Texture.cpp.obj: CMakeFiles/openGL.dir/flags.make
 CMakeFiles/openGL.dir/src/Texture.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
 CMakeFiles/openGL.dir/src/Texture.cpp.obj: C:/Users/86186/Desktop/openGL/src/Texture.cpp
 CMakeFiles/openGL.dir/src/Texture.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/openGL.dir/src/Texture.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/openGL.dir/src/Texture.cpp.obj"
 	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/Texture.cpp.obj -MF CMakeFiles\openGL.dir\src\Texture.cpp.obj.d -o CMakeFiles\openGL.dir\src\Texture.cpp.obj -c C:\Users\86186\Desktop\openGL\src\Texture.cpp
 
 CMakeFiles/openGL.dir/src/Texture.cpp.i: cmake_force
@@ -132,7 +147,7 @@ CMakeFiles/openGL.dir/src/Transform.cpp.obj: CMakeFiles/openGL.dir/flags.make
 CMakeFiles/openGL.dir/src/Transform.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
 CMakeFiles/openGL.dir/src/Transform.cpp.obj: C:/Users/86186/Desktop/openGL/src/Transform.cpp
 CMakeFiles/openGL.dir/src/Transform.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/openGL.dir/src/Transform.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/openGL.dir/src/Transform.cpp.obj"
 	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/Transform.cpp.obj -MF CMakeFiles\openGL.dir\src\Transform.cpp.obj.d -o CMakeFiles\openGL.dir\src\Transform.cpp.obj -c C:\Users\86186\Desktop\openGL\src\Transform.cpp
 
 CMakeFiles/openGL.dir/src/Transform.cpp.i: cmake_force
@@ -147,7 +162,7 @@ CMakeFiles/openGL.dir/src/glad.c.obj: CMakeFiles/openGL.dir/flags.make
 CMakeFiles/openGL.dir/src/glad.c.obj: CMakeFiles/openGL.dir/includes_C.rsp
 CMakeFiles/openGL.dir/src/glad.c.obj: C:/Users/86186/Desktop/openGL/src/glad.c
 CMakeFiles/openGL.dir/src/glad.c.obj: CMakeFiles/openGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/openGL.dir/src/glad.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/openGL.dir/src/glad.c.obj"
 	D:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/glad.c.obj -MF CMakeFiles\openGL.dir\src\glad.c.obj.d -o CMakeFiles\openGL.dir\src\glad.c.obj -c C:\Users\86186\Desktop\openGL\src\glad.c
 
 CMakeFiles/openGL.dir/src/glad.c.i: cmake_force
@@ -158,11 +173,26 @@ CMakeFiles/openGL.dir/src/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/openGL.dir/src/glad.c.s"
 	D:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\86186\Desktop\openGL\src\glad.c -o CMakeFiles\openGL.dir\src\glad.c.s
 
+CMakeFiles/openGL.dir/src/model_loader.cpp.obj: CMakeFiles/openGL.dir/flags.make
+CMakeFiles/openGL.dir/src/model_loader.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
+CMakeFiles/openGL.dir/src/model_loader.cpp.obj: C:/Users/86186/Desktop/openGL/src/model_loader.cpp
+CMakeFiles/openGL.dir/src/model_loader.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/openGL.dir/src/model_loader.cpp.obj"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/model_loader.cpp.obj -MF CMakeFiles\openGL.dir\src\model_loader.cpp.obj.d -o CMakeFiles\openGL.dir\src\model_loader.cpp.obj -c C:\Users\86186\Desktop\openGL\src\model_loader.cpp
+
+CMakeFiles/openGL.dir/src/model_loader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/openGL.dir/src/model_loader.cpp.i"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86186\Desktop\openGL\src\model_loader.cpp > CMakeFiles\openGL.dir\src\model_loader.cpp.i
+
+CMakeFiles/openGL.dir/src/model_loader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openGL.dir/src/model_loader.cpp.s"
+	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86186\Desktop\openGL\src\model_loader.cpp -o CMakeFiles\openGL.dir\src\model_loader.cpp.s
+
 CMakeFiles/openGL.dir/src/stb_image.cpp.obj: CMakeFiles/openGL.dir/flags.make
 CMakeFiles/openGL.dir/src/stb_image.cpp.obj: CMakeFiles/openGL.dir/includes_CXX.rsp
 CMakeFiles/openGL.dir/src/stb_image.cpp.obj: C:/Users/86186/Desktop/openGL/src/stb_image.cpp
 CMakeFiles/openGL.dir/src/stb_image.cpp.obj: CMakeFiles/openGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/openGL.dir/src/stb_image.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/openGL.dir/src/stb_image.cpp.obj"
 	D:\MinGW\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/openGL.dir/src/stb_image.cpp.obj -MF CMakeFiles\openGL.dir\src\stb_image.cpp.obj.d -o CMakeFiles\openGL.dir\src\stb_image.cpp.obj -c C:\Users\86186\Desktop\openGL\src\stb_image.cpp
 
 CMakeFiles/openGL.dir/src/stb_image.cpp.i: cmake_force
@@ -177,10 +207,12 @@ CMakeFiles/openGL.dir/src/stb_image.cpp.s: cmake_force
 openGL_OBJECTS = \
 "CMakeFiles/openGL.dir/main.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Light.cpp.obj" \
+"CMakeFiles/openGL.dir/src/Mesh.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Shader.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Texture.cpp.obj" \
 "CMakeFiles/openGL.dir/src/Transform.cpp.obj" \
 "CMakeFiles/openGL.dir/src/glad.c.obj" \
+"CMakeFiles/openGL.dir/src/model_loader.cpp.obj" \
 "CMakeFiles/openGL.dir/src/stb_image.cpp.obj"
 
 # External object files for target openGL
@@ -188,16 +220,18 @@ openGL_EXTERNAL_OBJECTS =
 
 openGL.exe: CMakeFiles/openGL.dir/main.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Light.cpp.obj
+openGL.exe: CMakeFiles/openGL.dir/src/Mesh.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Shader.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Texture.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/Transform.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/glad.c.obj
+openGL.exe: CMakeFiles/openGL.dir/src/model_loader.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/src/stb_image.cpp.obj
 openGL.exe: CMakeFiles/openGL.dir/build.make
 openGL.exe: CMakeFiles/openGL.dir/linklibs.rsp
 openGL.exe: CMakeFiles/openGL.dir/objects1.rsp
 openGL.exe: CMakeFiles/openGL.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable openGL.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\86186\Desktop\openGL\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable openGL.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\openGL.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

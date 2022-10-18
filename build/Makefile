@@ -176,6 +176,30 @@ src/Light.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Light.cpp.s
 .PHONY : src/Light.cpp.s
 
+src/Mesh.obj: src/Mesh.cpp.obj
+.PHONY : src/Mesh.obj
+
+# target to build an object file
+src/Mesh.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Mesh.cpp.obj
+.PHONY : src/Mesh.cpp.obj
+
+src/Mesh.i: src/Mesh.cpp.i
+.PHONY : src/Mesh.i
+
+# target to preprocess a source file
+src/Mesh.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Mesh.cpp.i
+.PHONY : src/Mesh.cpp.i
+
+src/Mesh.s: src/Mesh.cpp.s
+.PHONY : src/Mesh.s
+
+# target to generate assembly for a file
+src/Mesh.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Mesh.cpp.s
+.PHONY : src/Mesh.cpp.s
+
 src/Shader.obj: src/Shader.cpp.obj
 .PHONY : src/Shader.obj
 
@@ -272,6 +296,30 @@ src/glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/glad.c.s
 .PHONY : src/glad.c.s
 
+src/model_loader.obj: src/model_loader.cpp.obj
+.PHONY : src/model_loader.obj
+
+# target to build an object file
+src/model_loader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/model_loader.cpp.obj
+.PHONY : src/model_loader.cpp.obj
+
+src/model_loader.i: src/model_loader.cpp.i
+.PHONY : src/model_loader.i
+
+# target to preprocess a source file
+src/model_loader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/model_loader.cpp.i
+.PHONY : src/model_loader.cpp.i
+
+src/model_loader.s: src/model_loader.cpp.s
+.PHONY : src/model_loader.s
+
+# target to generate assembly for a file
+src/model_loader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/model_loader.cpp.s
+.PHONY : src/model_loader.cpp.s
+
 src/stb_image.obj: src/stb_image.cpp.obj
 .PHONY : src/stb_image.obj
 
@@ -311,6 +359,9 @@ help:
 	@echo ... src/Light.obj
 	@echo ... src/Light.i
 	@echo ... src/Light.s
+	@echo ... src/Mesh.obj
+	@echo ... src/Mesh.i
+	@echo ... src/Mesh.s
 	@echo ... src/Shader.obj
 	@echo ... src/Shader.i
 	@echo ... src/Shader.s
@@ -323,6 +374,9 @@ help:
 	@echo ... src/glad.obj
 	@echo ... src/glad.i
 	@echo ... src/glad.s
+	@echo ... src/model_loader.obj
+	@echo ... src/model_loader.i
+	@echo ... src/model_loader.s
 	@echo ... src/stb_image.obj
 	@echo ... src/stb_image.i
 	@echo ... src/stb_image.s

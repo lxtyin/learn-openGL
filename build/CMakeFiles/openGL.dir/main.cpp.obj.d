@@ -525,4 +525,7 @@ CMakeFiles/openGL.dir/main.cpp.obj: \
  C:/Users/86186/Desktop/openGL/include/exglm.hpp \
  C:/Users/86186/Desktop/openGL/include/Light.h \
  C:/Users/86186/Desktop/openGL/include/Shader.h \
- C:/Users/86186/Desktop/openGL/include/tool.h
+ C:/Users/86186/Desktop/openGL/include/tool.h \
+ C:/Users/86186/Desktop/openGL/include/Mesh.h \
+ C:/Users/86186/Desktop/openGL/include/Texture.h \
+ C:/Users/86186/Desktop/openGL/include/model_loader.h

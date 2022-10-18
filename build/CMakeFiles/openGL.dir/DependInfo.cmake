@@ -11,9 +11,11 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/86186/Desktop/openGL/src/glad.c" "CMakeFiles/openGL.dir/src/glad.c.obj" "gcc" "CMakeFiles/openGL.dir/src/glad.c.obj.d"
   "C:/Users/86186/Desktop/openGL/main.cpp" "CMakeFiles/openGL.dir/main.cpp.obj" "gcc" "CMakeFiles/openGL.dir/main.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Light.cpp" "CMakeFiles/openGL.dir/src/Light.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Light.cpp.obj.d"
+  "C:/Users/86186/Desktop/openGL/src/Mesh.cpp" "CMakeFiles/openGL.dir/src/Mesh.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Mesh.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Shader.cpp" "CMakeFiles/openGL.dir/src/Shader.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Shader.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Texture.cpp" "CMakeFiles/openGL.dir/src/Texture.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Texture.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/Transform.cpp" "CMakeFiles/openGL.dir/src/Transform.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/Transform.cpp.obj.d"
+  "C:/Users/86186/Desktop/openGL/src/model_loader.cpp" "CMakeFiles/openGL.dir/src/model_loader.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/model_loader.cpp.obj.d"
   "C:/Users/86186/Desktop/openGL/src/stb_image.cpp" "CMakeFiles/openGL.dir/src/stb_image.cpp.obj" "gcc" "CMakeFiles/openGL.dir/src/stb_image.cpp.obj.d"
   )
 

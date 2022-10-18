@@ -43,3 +43,7 @@ void Transform::setPosition(glm::vec3 v) {
 void Transform::setPosition(float vx, float vy, float vz) {
     setPosition(glm::vec3(vx, vy, vz));
 }
+void Transform::setLookAt(glm::vec3 tar, glm::vec3 vup) {
+    glm::vec3 pos = position();
+    transmat = glm::lookAt(pos, tar, vup);
+}

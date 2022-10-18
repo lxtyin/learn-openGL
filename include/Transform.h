@@ -24,6 +24,7 @@ public:
     glm::vec3 position();
     void setPosition(glm::vec3 v);
     void setPosition(float vx, float vy, float vz);
+    void setLookAt(glm::vec3 tar, glm::vec3 vup); //z轴朝向tar，同时y轴设为vup
 };
 
 

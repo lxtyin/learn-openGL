@@ -21,11 +21,12 @@ Texture::Texture(const char* imagePath, unsigned int type) {
                      GL_RGB,            //保存的格式
                      width, height,     //长宽
                      0,                 //历史遗留
-                     GL_RGBA,           //原图格式
+                     type,              //原图格式
                      GL_UNSIGNED_BYTE,  //存储为Byte数组
                      data);             //数据源
 
         glGenerateMipmap(GL_TEXTURE_2D);//生成多级渐远纹理（具体先略过）
+        
         stbi_image_free(data);//释放图像内存
     } catch(...) {
         cerr << imagePath << ": Image load failed." << endl;
