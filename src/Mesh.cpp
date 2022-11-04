@@ -65,7 +65,7 @@ Dem_Mesh::Dem_Mesh(const vector<Vertex> &vers, const vector<uint> &ids) :
     }
 }
 
-void Mesh::Draw() const {
+void Mesh::draw() const {
     glBindVertexArray(VAO);
     if(EBO) glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     else glDrawArrays(GL_TRIANGLES, 0, vertices.size());

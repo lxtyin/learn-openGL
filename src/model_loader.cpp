@@ -1,7 +1,6 @@
-
-#include "model_loader.h"
 #include <fstream>
 #include <iostream>
+#include "model_loader.h"
 #include "exglm.hpp"
 using namespace std;
 
@@ -9,6 +8,7 @@ const float INTERVAL = 0.2; //水平间距
 const float HISCALE = 0.01; //高度比例
 
 Dem_Mesh dem_loader(const char* path) { //获得mx_height
+
     vector<Vertex> vers;
     vector<uint> ids;
     std::ifstream fin(path);

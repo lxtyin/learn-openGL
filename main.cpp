@@ -7,6 +7,7 @@
 #include "Light.h"
 #include "tool.h"
 #include "Mesh.h"
+#include "Model.h"
 #include "model_loader.h"
 
 using namespace std;
@@ -122,6 +123,8 @@ int main(int argc, const char* argv[]) {
     boxTrans.scale(0.3, 0.3, 0.3);
     boxLight.transform = boxTrans;
 
+    Model arrow("../models/coordinate.glb");
+
     while(!glfwWindowShouldClose(window)) {
         
         //渲染部分
@@ -146,7 +149,7 @@ int main(int argc, const char* argv[]) {
         Light::applyAllLightTo(terrainShader);
 
         terrainShader.setMat4("model", terrainTrans.transmat);
-        terrainMesh.Draw();
+        terrainMesh.draw();
 
         // ---
         boxShader.use();
@@ -156,7 +159,7 @@ int main(int argc, const char* argv[]) {
         boxShader.setVec3("viewPos", viewTrans.position());
 
         boxShader.setMat4("model", boxTrans.transmat);
-        boxMesh.Draw();
+        arrow.meshes[5].draw();
 
         // terrainTrans.rotate(detaTime * M_PI / 8, 0, 1, 0, LOCAL_SPACE);
         boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);

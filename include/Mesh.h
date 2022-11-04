@@ -29,7 +29,7 @@ public:
     // Mesh(float* datasource);
     Mesh(const vector<Vertex> &vers); //不使用EBO
     Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //使用EBO
-    void Draw() const;
+    void draw() const;
 };
 
 class Dem_Mesh : public Mesh {
