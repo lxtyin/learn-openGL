@@ -17,6 +17,13 @@ namespace glm {
         // 这边比较麻烦 先不管效率这么放这
         return rotate(mat4(1.0f), angle, v) * m;
     }
+
+    //单点的旋转
+    template<typename T, qualifier Q>
+    GLM_FUNC_QUALIFIER vec<3, T, Q> point_rotate(vec<3, T, Q> const& ori, T angle, vec<3, T, Q> const& v) {
+        return rotate(mat4(1.0f), angle, v) * vec4(ori, 1.0);
+    }
+
     //参考父坐标缩放好像没有太大意义
     
 }

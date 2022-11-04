@@ -9,7 +9,16 @@
 #include <string>
 using std::string;
 
-class Shader{
+/* Shader类传入一个文件路径，以读取一个shader
+ * 有关Shader，Light，Material协同工作的约定：
+ * Shader文件中必要的三个uniform：model, view, projection
+ * 如需应用光照，则还需要viewPos
+ * 材质uniform规定名为 material.
+ * 光照uniform规定名为 light[i].  光照数目 light_N，这些由光照类applyAllLightTo负责传入
+ *
+*/
+
+class Shader {
     unsigned int shaderProgram;
 public:
     Shader(const string &vertexShaderPath, const string &fragmentShaderSource);

@@ -27,14 +27,16 @@ protected:
     unsigned int VAO, VBO, EBO;
 public:
     // Mesh(float* datasource);
-    Mesh(vector<Vertex> vers); //不使用EBO
-    Mesh(vector<Vertex> vers, vector<uint> ids); //使用EBO
-    void Draw();
+    Mesh(const vector<Vertex> &vers); //不使用EBO
+    Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //使用EBO
+    void Draw() const;
 };
 
 class Dem_Mesh : public Mesh {
 public:
     float mx_height;
-    Dem_Mesh(vector<Vertex> vers); //不使用EBO
-    Dem_Mesh(vector<Vertex> vers, vector<uint> ids); //使用EBO
+    Dem_Mesh(const vector<Vertex> &vers); //不使用EBO
+    Dem_Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //使用EBO
 };
+
+extern const vector<Vertex> BOX_MESH_SOURCE;

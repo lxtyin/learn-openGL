@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-Mesh::Mesh(vector<Vertex> vers) :
+Mesh::Mesh(const vector<Vertex> &vers) :
     vertices(vers), EBO(0) {
     //建立对象
     glGenVertexArrays(1, &VAO);
@@ -24,7 +24,7 @@ Mesh::Mesh(vector<Vertex> vers) :
     glBindVertexArray(0);//unbind VAO
 }
 
-Mesh::Mesh(vector<Vertex> vers, vector<uint> ids) :
+Mesh::Mesh(const vector<Vertex> &vers, const vector<uint> &ids) :
     vertices(vers), indices(ids) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -49,25 +49,70 @@ Mesh::Mesh(vector<Vertex> vers, vector<uint> ids) :
     glBindVertexArray(0);//unbind VAO
 }
 
-Dem_Mesh::Dem_Mesh(vector<Vertex> vers) :
+Dem_Mesh::Dem_Mesh(const vector<Vertex> &vers) :
     Mesh(vers) {
     mx_height = -1e9;
     for(auto& v : vertices) {
-        if(v.pos[2] > mx_height) mx_height = v.pos[2];
+        if(v.pos[1] > mx_height) mx_height = v.pos[1];
     }
 }
 
-Dem_Mesh::Dem_Mesh(vector<Vertex> vers, vector<uint> ids) :
+Dem_Mesh::Dem_Mesh(const vector<Vertex> &vers, const vector<uint> &ids) :
     Mesh(vers, ids) {
     mx_height = -1e9;
     for(auto& v : vertices) {
-        if(v.pos[2] > mx_height) mx_height = v.pos[2];
+        if(v.pos[1] > mx_height) mx_height = v.pos[1];
     }
 }
 
-void Mesh::Draw() {
+void Mesh::Draw() const {
     glBindVertexArray(VAO);
     if(EBO) glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     else glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     glBindVertexArray(0);
 }
+
+const vector<Vertex> BOX_MESH_SOURCE {
+    //pos                //nor                //tex
+    {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0, 0},
+    {0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,    1, 0},
+    {0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,    1, 1},
+    {0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,    1, 1},
+    {-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,   0, 1},
+    {-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,   0, 0},
+
+    {-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,    0, 0},
+    {0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,     1, 0},
+    {0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,     1, 1},
+    {0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,     1, 1},
+    {-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,    0, 1},
+    {-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,    0, 0},
+
+    {-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,   0, 0},
+    {-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,   1, 0},
+    {-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,   1, 1},
+    {-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,   1, 1},
+    {-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,   0, 1},
+    {-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,   0, 0},
+
+    {0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,    0, 0},
+    {0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,    1, 0},
+    {0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,    1, 1},
+    {0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,    1, 1},
+    {0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,    0, 1},
+    {0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,    0, 0},
+
+    {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,   0, 0},
+    {0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,    1, 0},
+    {0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,    1, 1},
+    {0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,    1, 1},
+    {-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,   0, 1},
+    {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,   0, 0},
+
+    {-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,   0, 0},
+    {0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,    1, 0},
+    {0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,    1, 1},
+    {0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,    1, 1},
+    {-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,   0, 1},
+    {-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,   0, 0}
+};

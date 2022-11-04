@@ -11,10 +11,13 @@
 
 using namespace std;
 
-double lastTime, detaTime = 0;
+float lastTime, detaTime = 0;
 int screenWidth = 800, screenHeight = 800;
 
-Transform viewTrans, playerTrans;
+Transform viewTrans, playerTrans; //视点transform，玩家transform
+ParallelLight parallelLight(glm::vec3(0.8, 0.8, 0.8), glm::vec3(3, -1, 0)); //全局平行光
+
+
 //窗口大小更改时的回调函数
 void framebuffer_size_callback(GLFWwindow *window, int width, int height){
     screenWidth = width;
@@ -31,6 +34,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
         mouse_lastX = xpos;
         mouse_lastY = ypos;
     }
+
+//    cout << "move " << xpos - mouse_lastX << ' ' << ypos - mouse_lastY << '\n';
 
     //这里应该是 以自身为中心，按世界的y轴旋转，故在自身坐标系下表示世界y轴
     glm::vec3 hvec = glm::inverse(viewTrans.transmat) * glm::vec4(0, -1, 0, 0);
@@ -50,10 +55,14 @@ void processInput(GLFWwindow* window) {
     if(glfwGetKey(window, GLFW_KEY_A)) playerTrans.translate(-4 * detaTime, 0, 0);
     if(glfwGetKey(window, GLFW_KEY_SPACE)) playerTrans.translate(0, 4 * detaTime, 0);
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) playerTrans.translate(0, -4 * detaTime, 0);
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
+    if(glfwGetKey(window, GLFW_KEY_T)){
+        parallelLight.direction = glm::point_rotate(parallelLight.direction, 2 * detaTime, vec3(0, -1, 0));
+    }
+    if(glfwGetKey(window, GLFW_KEY_Y)){
+        parallelLight.direction = glm::point_rotate(parallelLight.direction, -2 * detaTime, vec3(0, -1, 0));
+    }
 
-    // if(glfwGetKey(window, GLFW_KEY_J)) light.angleIn += 0.02, light.angleOut += 0.02;
-    // if(glfwGetKey(window, GLFW_KEY_K)) light.angleIn -= 0.02, light.angleOut -= 0.02;
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
 
     viewTrans.setPosition(playerTrans.position());
 }
@@ -91,75 +100,27 @@ int main(int argc, const char* argv[]) {
     //启用深度测试
     glEnable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
-    
 
-    vector<Vertex> boxdata{
-            //pos                //nor                //tex
-            {-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,   0, 0},
-            {0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,    1, 0},
-            {0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,    1, 1},
-            {0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,    1, 1},
-            {-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,   0, 1},
-            {-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,   0, 0},
-
-            {-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,    0, 0},
-            {0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,     1, 0},
-            {0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,     1, 1},
-            {0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,     1, 1},
-            {-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,    0, 1},
-            {-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,    0, 0},
-
-            {-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,   0, 0},
-            {-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,   1, 0},
-            {-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,   1, 1},
-            {-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,   1, 1},
-            {-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,   0, 1},
-            {-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,   0, 0},
-
-            {0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,    0, 0},
-            {0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,    1, 0},
-            {0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,    1, 1},
-            {0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,    1, 1},
-            {0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,    0, 1},
-            {0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,    0, 0},
-
-            {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,   0, 0},
-            {0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,    1, 0},
-            {0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,    1, 1},
-            {0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,    1, 1},
-            {-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,   0, 1},
-            {-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,   0, 0},
-
-            {-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,   0, 0},
-            {0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,    1, 0},
-            {0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,    1, 1},
-            {0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,    1, 1},
-            {-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,   0, 1},
-            {-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,   0, 0}
-    };
-    Mesh objBox(boxdata);
-    Transform boxTrans;
-    Shader lightshader("../shader/color.vs", "../shader/color.fs");
-    
+    // 地形
     Transform terrainTrans;
-    Dem_Mesh terrain = dem_loader("../terrain/terrain2.dem");
+    Dem_Mesh terrainMesh = dem_loader("../terrain/terrain2.dem");
     Texture terrainTexture("../terrain/terrain2.bmp", GL_RGB);
-    Texture terrainTexture2("../terrain/terrain2.bmp", GL_RGB);
     terrainTexture.activeTarget(0);
-    terrainTexture2.activeTarget(1);
-    Shader myshader("../shader/simple_light.vs", "../shader/simple_light.fs");
+    Shader terrainShader("../shader/simple_light.vs", "../shader/simple_light.fs");
 
-    //设置初始视点：dem正上方，向下看
-    playerTrans.setPosition(0, terrain.mx_height + 10, 0);
-    viewTrans.setPosition(0, terrain.mx_height + 10, 0);
+    // 设置初始视点：dem正上方，向下看
+    playerTrans.setPosition(0, terrainMesh.mx_height + 4, 0);
+    viewTrans.setPosition(0, terrainMesh.mx_height + 4, 0);
     viewTrans.setLookAt(glm::vec3(0, 1e9, 0), glm::vec3(0, 0, 1));
 
-    PointLight light(vec3(2, 2, 1));
-    boxTrans.setPosition(3, 1, 3);
+    // 一个箱子
+    Mesh boxMesh(BOX_MESH_SOURCE);
+    Transform boxTrans;
+    Shader boxShader("../shader/color.vs", "../shader/color.fs");
+    PointLight boxLight(vec3(1, 1, 1));
+    boxTrans.setPosition(9, terrainMesh.mx_height + 1, 8);
     boxTrans.scale(0.3, 0.3, 0.3);
-    light.transform = boxTrans;
-
-    ParallelLight light2(glm::vec3(0.1, 0.1, 0.1), glm::vec3(1, -1, 0));
+    boxLight.transform = boxTrans;
 
     while(!glfwWindowShouldClose(window)) {
         
@@ -169,35 +130,37 @@ int main(int argc, const char* argv[]) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //shader作为状态机
-        myshader.use();
+        terrainShader.use();
         //设置物体本身材质
-        myshader.setInt("material.diffuse", 0);//贴图id
-        myshader.setInt("material.specular", 1);
-        myshader.setFloat("material.spininess", 16);
+        terrainShader.setInt("material.diffuse", 0);//贴图id
+        terrainShader.setInt("material.specular", 1);
+        terrainShader.setFloat("material.spininess", 16);
         //传入必要的变换矩阵
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
             1.0f * screenWidth / screenHeight, 0.1f, 100.0f);
-        myshader.setMat4("view", glm::inverse(viewTrans.transmat));
-        myshader.setMat4("projection", projection);
-        myshader.setVec3("viewPos", viewTrans.position());
+        terrainShader.setMat4("view", glm::inverse(viewTrans.transmat));
+        terrainShader.setMat4("projection", projection);
+        terrainShader.setVec3("viewPos", viewTrans.position());
 
         //应用光照
-        Light::applyAllLightTo(myshader);
-        
-        myshader.setMat4("model", terrainTrans.transmat);
-        terrain.Draw();
+        Light::applyAllLightTo(terrainShader);
+
+        terrainShader.setMat4("model", terrainTrans.transmat);
+        terrainMesh.Draw();
 
         // ---
-        lightshader.use();
+        boxShader.use();
 
-        lightshader.setMat4("view", glm::inverse(viewTrans.transmat));
-        lightshader.setMat4("projection", projection);
-        lightshader.setVec3("viewPos", viewTrans.position());
+        boxShader.setMat4("view", glm::inverse(viewTrans.transmat));
+        boxShader.setMat4("projection", projection);
+        boxShader.setVec3("viewPos", viewTrans.position());
 
-        lightshader.setMat4("model", boxTrans.transmat);
-        objBox.Draw();
+        boxShader.setMat4("model", boxTrans.transmat);
+        boxMesh.Draw();
 
-        terrainTrans.rotate(detaTime * M_PI / 8, 0, 1, 0, LOCAL_SPACE);
+        // terrainTrans.rotate(detaTime * M_PI / 8, 0, 1, 0, LOCAL_SPACE);
+        boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);
+        boxLight.transform = boxTrans;
 
         detaTime = glfwGetTime() - lastTime;//更新detaTime
         lastTime += detaTime;
