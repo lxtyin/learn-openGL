@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Model.h"
+#include "stb_image.h"
 
 Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     vector<Vertex> vers;
@@ -11,7 +12,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     // 读取所有顶点数据
     for(int i = 0; i < mesh->mNumVertices; i++){
         float tex[2] = {0, 0};
-        if(mesh->mTextureCoords[0]) { //如果有纹理就取第一个
+        if(mesh->mTextureCoords[0]) { //如果有纹理坐标就取第一个
             tex[0] = mesh->mTextureCoords[0][i].x;
             tex[1] = mesh->mTextureCoords[0][i].y;
         }
@@ -27,7 +28,25 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
             ids.push_back(face.mIndices[j]);
     }
 
-    return Mesh(vers, ids);
+    Mesh result(vers, ids);
+
+    // 读取材质
+    if(mesh->mMaterialIndex >= 0){
+        aiMaterial *mat = scene->mMaterials[mesh->mMaterialIndex];
+        for(int i = 0;i < mat->GetTextureCount(aiTextureType_SPECULAR);i++){
+            aiString str;
+            mat->GetTexture(aiTextureType_SPECULAR, i, &str);
+            string path = directory + string(str.C_Str());
+            result.addTexture(Texture(path.c_str()), TYPE_SPECULAR);
+        }
+        for(int i = 0;i < mat->GetTextureCount(aiTextureType_DIFFUSE);i++){
+            aiString str;
+            mat->GetTexture(aiTextureType_DIFFUSE, i, &str);
+            string path = directory + string(str.C_Str());
+            result.addTexture(Texture(path.c_str()), TYPE_DIFFUSE);
+        }
+    }
+    return result;
 }
 
 void Model::processNode(aiNode *node, const aiScene *scene) {
@@ -40,7 +59,7 @@ void Model::processNode(aiNode *node, const aiScene *scene) {
     }
 }
 
-Model::Model(const char *path) {
+Model::Model(const string &path) {
     Assimp::Importer import;
     const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
     // 第二个参数为预处理指令，此处指定：全部转换为三角形 | 翻转纹理y轴 | 自动生成法线
@@ -49,15 +68,17 @@ Model::Model(const char *path) {
         std::cerr << "ERROR::ASSIMP::" << import.GetErrorString() << '\n';
         return;
     }
+    directory = path;
+    while(!directory.empty() && directory.back() != '/' && directory.back() != '\\') directory.pop_back();
 
     // 递归获得网格（仅数据
     processNode(scene->mRootNode, scene);
-    std::cout << "The number of meshes in " << path << " : " << meshes.size() << '\n';
+    std::cout << "The number of meshes in " << directory << " : " << meshes.size() << '\n';
 }
 
 // 绘制所有
-void Model::draw() {
+void Model::draw(Shader &shader) {
     for(Mesh &m: meshes){
-        m.draw();
+        m.draw(shader);
     }
 }

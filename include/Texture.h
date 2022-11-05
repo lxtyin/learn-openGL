@@ -7,10 +7,8 @@
 //纹理对象，一张图片
 class Texture{
     unsigned int textureObject;
-    int width, height, channel;
 public:
-    Texture();
-    Texture(const char* imagePath, unsigned int type = GL_RGB);
+    Texture(const char* imagePath);
     void activeTarget(unsigned int id)const;
     void setParameter(int pname, int params)const;
 };

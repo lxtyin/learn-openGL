@@ -5,12 +5,12 @@ out vec4 FragColor;
 in vec3 normal; //已标准化法线
 in vec3 fragPos;
 in vec2 texPos;
-uniform vec3 viewPos; //观察者位置
+in vec3 viewPos; //观察者位置
 
 //物体材质，反映物体本身性质
 struct Material{
-    sampler2D diffuse; // 漫反射颜色 = 环境光颜色 = 物体本身颜色，强度差别取决于光照设定
-    sampler2D specular;   // 镜面反射颜色，通常为一定比例的白色/高光贴图
+    sampler2D diffuseMap_1; // 漫反射颜色 = 环境光颜色 = 物体本身颜色，强度差别取决于光照设定
+    sampler2D specularMap_1;   // 镜面反射颜色，通常为一定比例的白色/高光贴图
     float spininess; // 反光度
 };
 uniform Material material;
@@ -56,8 +56,8 @@ vec3 calcuColor(Light l){
         float cs = dot(lightDir, normalize(-l.direction));
         angleDecay = clamp((cs - l.outCut) / (l.inCut - l.outCut), 0.0, 1.0);
     }
-    vec3 curDiffuseCol = vec3(texture(material.diffuse, texPos));
-    vec3 curSpecularCol = vec3(texture(material.specular, texPos));
+    vec3 curDiffuseCol = vec3(texture(material.diffuseMap_1, texPos));
+    vec3 curSpecularCol = vec3(texture(material.specularMap_1, texPos));
     vec3 ambient = l.ambient * curDiffuseCol;
     vec3 diffuse = l.diffuse * curDiffuseCol * max(dot(lightDir, normal), 0);
     vec3 viewDir = normalize(viewPos - fragPos);

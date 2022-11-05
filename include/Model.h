@@ -9,14 +9,16 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+using std::string;
 
 class Model {
+    vector<Mesh> meshes;
+    string directory; // 所在目录
     void processNode(aiNode *node, const aiScene *scene);
     Mesh processMesh(aiMesh *mesh, const aiScene *scene);
 public:
-    vector<Mesh> meshes;
-    Model(const char *path);
-    void draw();
+    Model(const string &path);
+    void draw(Shader &shader);
 
 };
 

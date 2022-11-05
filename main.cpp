@@ -16,8 +16,7 @@ float lastTime, detaTime = 0;
 int screenWidth = 800, screenHeight = 800;
 
 Transform viewTrans, playerTrans; //视点transform，玩家transform
-ParallelLight parallelLight(glm::vec3(0.8, 0.8, 0.8), glm::vec3(3, -1, 0)); //全局平行光
-
+ParallelLight parallelLight(glm::vec3(0.2, 0.2, 0.2), glm::vec3(3, -1, 0)); //全局平行光
 
 //窗口大小更改时的回调函数
 void framebuffer_size_callback(GLFWwindow *window, int width, int height){
@@ -105,8 +104,9 @@ int main(int argc, const char* argv[]) {
     // 地形
     Transform terrainTrans;
     Dem_Mesh terrainMesh = dem_loader("../terrain/terrain2.dem");
-    Texture terrainTexture("../terrain/terrain2.bmp", GL_RGB);
-    terrainTexture.activeTarget(0);
+    terrainMesh.addTexture(Texture("../terrain/terrain2.bmp"), TYPE_DIFFUSE);
+//    terrainMesh.addTexture(Texture("../terrain/terrain.bmp"), TYPE_SPECULAR);
+
     Shader terrainShader("../shader/simple_light.vs", "../shader/simple_light.fs");
 
     // 设置初始视点：dem正上方，向下看
@@ -123,7 +123,7 @@ int main(int argc, const char* argv[]) {
     boxTrans.scale(0.3, 0.3, 0.3);
     boxLight.transform = boxTrans;
 
-    Model arrow("../models/coordinate.glb");
+    Model arrow("../models/nanosuit/nanosuit.obj");
 
     while(!glfwWindowShouldClose(window)) {
         
@@ -135,34 +135,30 @@ int main(int argc, const char* argv[]) {
         //shader作为状态机
         terrainShader.use();
         //设置物体本身材质
-        terrainShader.setInt("material.diffuse", 0);//贴图id
-        terrainShader.setInt("material.specular", 1);
-        terrainShader.setFloat("material.spininess", 16);
+//        terrainShader.setInt("material.spininess", 16);
+
         //传入必要的变换矩阵
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
             1.0f * screenWidth / screenHeight, 0.1f, 100.0f);
-        terrainShader.setMat4("view", glm::inverse(viewTrans.transmat));
+        terrainShader.setMat4("view", viewTrans.transmat);
         terrainShader.setMat4("projection", projection);
-        terrainShader.setVec3("viewPos", viewTrans.position());
+        terrainShader.setMat4("model", terrainTrans.transmat);
 
         //应用光照
         Light::applyAllLightTo(terrainShader);
 
-        terrainShader.setMat4("model", terrainTrans.transmat);
-        terrainMesh.draw();
+        terrainMesh.draw(terrainShader);
+        arrow.draw(terrainShader);
 
         // ---
         boxShader.use();
-
-        boxShader.setMat4("view", glm::inverse(viewTrans.transmat));
+        boxShader.setMat4("view", viewTrans.transmat);
         boxShader.setMat4("projection", projection);
-        boxShader.setVec3("viewPos", viewTrans.position());
-
         boxShader.setMat4("model", boxTrans.transmat);
-        arrow.meshes[5].draw();
+//        boxMesh.draw(boxShader);
 
         // terrainTrans.rotate(detaTime * M_PI / 8, 0, 1, 0, LOCAL_SPACE);
-        boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);
+//        boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);
         boxLight.transform = boxTrans;
 
         detaTime = glfwGetTime() - lastTime;//更新detaTime
