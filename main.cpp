@@ -16,7 +16,7 @@ float lastTime, detaTime = 0;
 int screenWidth = 800, screenHeight = 800;
 
 Transform viewTrans, playerTrans; //视点transform，玩家transform
-ParallelLight parallelLight(glm::vec3(1, 1, 1), glm::vec3(3, -1, 0)); //全局平行光
+ParallelLight parallelLight(glm::vec3(0.8, 0.8, 0.8), glm::vec3(3, -1, 0)); //全局平行光
 
 //窗口大小更改时的回调函数
 void framebuffer_size_callback(GLFWwindow *window, int width, int height){
@@ -105,7 +105,7 @@ int main(int argc, const char* argv[]) {
     Transform terrainTrans;
     Dem_Mesh terrainMesh = dem_loader("../terrain/terrain2.dem");
     terrainMesh.addTexture(Texture("../terrain/terrain2.bmp"), TYPE_DIFFUSE);
-//    terrainMesh.addTexture(Texture("../terrain/terrain2.bmp"), TYPE_SPECULAR);
+    terrainMesh.addTexture(Texture("../terrain/terrain2_highlight.bmp"), TYPE_SPECULAR);
 
     Shader terrainShader("../shader/simple_light.vs", "../shader/simple_light.fs");
 
@@ -123,6 +123,8 @@ int main(int argc, const char* argv[]) {
     boxTrans.scale(0.3, 0.3, 0.3);
     boxLight.transform = boxTrans;
 
+//    terrainTrans.scale(10, 2, 10);
+
     Model arrow("../models/nanosuit/nanosuit.obj");
 //    Model arrow("../models/Lowpoly_tree_sample.obj");
 
@@ -136,7 +138,7 @@ int main(int argc, const char* argv[]) {
         //shader作为状态机
         terrainShader.use();
         //设置物体本身材质
-        terrainShader.setFloat("material.spininess", 16);
+        terrainShader.setFloat("material.spininess", 256);
 
         //传入必要的变换矩阵
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
@@ -148,8 +150,8 @@ int main(int argc, const char* argv[]) {
         //应用光照
         Light::applyAllLightTo(terrainShader);
 
-//        terrainMesh.draw(terrainShader);
-        arrow.draw(terrainShader);
+        terrainMesh.draw(terrainShader);
+//        arrow.draw(terrainShader);
 
         // ---
         boxShader.use();

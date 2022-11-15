@@ -5,7 +5,7 @@
 using namespace std;
 
 const float INTERVAL = 0.2; //水平间距
-const float HISCALE = 0.01; //高度比例
+const float HISCALE = 0.03; //高度比例
 
 Dem_Mesh dem_loader(const char* path) { //获得mx_height
 

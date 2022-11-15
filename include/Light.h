@@ -17,7 +17,7 @@ const int TYPE_PARALLEL = 0;
 const int TYPE_POINT = 1;
 const int TYPE_SPOT = 2;
 const float DEFAULT_AMBIENT = 0.2; //默认环境光配比，构造时使用
-const float DEFAULT_DIFFUSE = 0.6; //默认漫反射光配比，构造时使用
+const float DEFAULT_DIFFUSE = 0.7; //默认漫反射光配比，构造时使用
 const vec3 DEFAULT_DECAY(1.0f, 0.09f, 0.032f); //默认衰减
 
 /*
