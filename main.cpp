@@ -125,7 +125,7 @@ int main(int argc, const char* argv[]) {
 
 //    terrainTrans.scale(10, 2, 10);
 
-    Model arrow("../models/nanosuit/nanosuit.obj");
+    Model arrow("../models/low_poly_winter_scene.glb");
 //    Model arrow("../models/Lowpoly_tree_sample.obj");
 
     while(!glfwWindowShouldClose(window)) {
@@ -142,7 +142,7 @@ int main(int argc, const char* argv[]) {
 
         //传入必要的变换矩阵
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-            1.0f * screenWidth / screenHeight, 0.1f, 100.0f);
+            1.0f * screenWidth / screenHeight, 0.1f, 1000.0f);
         terrainShader.setMat4("view", viewTrans.transmat);
         terrainShader.setMat4("projection", projection);
         terrainShader.setMat4("model", terrainTrans.transmat);
@@ -150,8 +150,8 @@ int main(int argc, const char* argv[]) {
         //应用光照
         Light::applyAllLightTo(terrainShader);
 
-        terrainMesh.draw(terrainShader);
-//        arrow.draw(terrainShader);
+//        terrainMesh.draw(terrainShader);
+        arrow.draw(terrainShader);
 
         // ---
         boxShader.use();

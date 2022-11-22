@@ -33,6 +33,8 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     // 读取材质
     if(mesh->mMaterialIndex >= 0){
         aiMaterial *mat = scene->mMaterials[mesh->mMaterialIndex];
+
+
         for(int i = 0;i < mat->GetTextureCount(aiTextureType_SPECULAR);i++){
             aiString str;
             mat->GetTexture(aiTextureType_SPECULAR, i, &str);
