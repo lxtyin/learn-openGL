@@ -12,35 +12,22 @@
 
 using namespace std;
 
-float lastTime, detaTime = 0;
-int screenWidth = 800, screenHeight = 800;
+const int SCREEN_W = 1680;
+const int SCREEN_H = 960;
 
 Transform viewTrans, playerTrans; //视点transform，玩家transform
-ParallelLight parallelLight(glm::vec3(0.8, 0.8, 0.8), glm::vec3(3, -1, 0)); //全局平行光
-
-//窗口大小更改时的回调函数
-void framebuffer_size_callback(GLFWwindow *window, int width, int height){
-    screenWidth = width;
-    screenHeight = height;
-    cout << "view changed! " << width << ' ' << height << '\n';
-    glViewport(0, 0, width, height);
-}
+SurroundLight surroundLight(vec3(0.1, 0.1, 0.1)); //环境光
+ParallelLight parallelLight(glm::vec3(0.5, 0.5, 0.5), glm::vec3(3, -1, 0)); //全局平行光
 
 //鼠标移动回调函数
-double mouse_lastX = -1e9, mouse_lastY = -1e9;
+float lastTime, detaTime = 0;
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-
-    if(mouse_lastX < -1e8) { //first move
-        mouse_lastX = xpos;
-        mouse_lastY = ypos;
-    }
-
-//    cout << "move " << xpos - mouse_lastX << ' ' << ypos - mouse_lastY << '\n';
+    static double mouse_lastX = xpos, mouse_lastY = ypos;
 
     //这里应该是 以自身为中心，按世界的y轴旋转，故在自身坐标系下表示世界y轴
     glm::vec3 hvec = glm::inverse(viewTrans.transmat) * glm::vec4(0, -1, 0, 0);
-    viewTrans.rotate((float)((xpos - mouse_lastX) * detaTime) * 0.7, hvec);
-    playerTrans.rotate((float)((xpos - mouse_lastX) * detaTime) * 0.7, 0, -1, 0);
+    viewTrans.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, hvec);
+    playerTrans.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, 0, -1, 0);
 
     viewTrans.rotate((float)((ypos - mouse_lastY) * detaTime), -1, 0, 0);
     mouse_lastX = xpos;
@@ -76,12 +63,11 @@ GLFWwindow* initWindow() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);//使用核心渲染模式
 
     //创建窗口，放入上下文中
-    GLFWwindow* window = glfwCreateWindow(800, 800, "My Window", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_W, SCREEN_H, "My Window", NULL, NULL);
     glfwMakeContextCurrent(window);
     
     //openGL本质是一个巨大的状态机，很多内容都是通过设置来完成的
     //注册回调函数
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     //设置鼠标模式
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -107,7 +93,7 @@ int main(int argc, const char* argv[]) {
     terrainMesh.addTexture(Texture("../terrain/terrain2.bmp"), TYPE_DIFFUSE);
     terrainMesh.addTexture(Texture("../terrain/terrain2_highlight.bmp"), TYPE_SPECULAR);
 
-    Shader terrainShader("../shader/simple_light.vs", "../shader/simple_light.fs");
+    Shader terrainShader("../shader/standard.vs", "../shader/standard.fs");
 
     // 设置初始视点：dem正上方，向下看
     playerTrans.setPosition(0, terrainMesh.mx_height + 4, 0);
@@ -123,13 +109,7 @@ int main(int argc, const char* argv[]) {
     boxTrans.scale(0.3, 0.3, 0.3);
     boxLight.transform = boxTrans;
 
-//    terrainTrans.scale(10, 2, 10);
-
-    Model arrow("../models/low_poly_winter_scene.glb");
-//    Model arrow("../models/Lowpoly_tree_sample.obj");
-
     while(!glfwWindowShouldClose(window)) {
-        
         //渲染部分
         //将颜色缓冲clear，即变成背景颜色
         //将深度缓冲clear，删掉前一帧的深度信息
@@ -137,12 +117,11 @@ int main(int argc, const char* argv[]) {
 
         //shader作为状态机
         terrainShader.use();
-        //设置物体本身材质
-        terrainShader.setFloat("material.spininess", 256);
+
 
         //传入必要的变换矩阵
         glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-            1.0f * screenWidth / screenHeight, 0.1f, 1000.0f);
+            1.0f * SCREEN_W / SCREEN_H, 0.1f, 1000.0f);
         terrainShader.setMat4("view", viewTrans.transmat);
         terrainShader.setMat4("projection", projection);
         terrainShader.setMat4("model", terrainTrans.transmat);
@@ -150,18 +129,16 @@ int main(int argc, const char* argv[]) {
         //应用光照
         Light::applyAllLightTo(terrainShader);
 
-//        terrainMesh.draw(terrainShader);
-        arrow.draw(terrainShader);
+        terrainMesh.draw(terrainShader);
 
         // ---
         boxShader.use();
         boxShader.setMat4("view", viewTrans.transmat);
         boxShader.setMat4("projection", projection);
         boxShader.setMat4("model", boxTrans.transmat);
-//        boxMesh.draw(boxShader);
+        boxMesh.draw(boxShader);
 
-        // terrainTrans.rotate(detaTime * M_PI / 8, 0, 1, 0, LOCAL_SPACE);
-//        boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);
+        boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);
         boxLight.transform = boxTrans;
 
         detaTime = glfwGetTime() - lastTime;//更新detaTime

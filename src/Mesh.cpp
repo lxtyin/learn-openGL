@@ -76,11 +76,11 @@ void Mesh::draw(Shader &shader) const {
     int id = 0;
     for(int i = 0;i < diffuse_tex.size();i++){
         diffuse_tex[i].activeTarget(id);
-        shader.setInt(str_format("material.diffuseMap_%d", i + 1), id++);
+        shader.setInt("diffuse_map", id++);
     }
     for(int i = 0;i < specular_tex.size();i++){
         specular_tex[i].activeTarget(id);
-        shader.setInt(str_format("material.specularMap_%d", i + 1), id++);
+        shader.setInt("specular_map", id++);
     }
 
     glBindVertexArray(VAO);
