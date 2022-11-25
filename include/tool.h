@@ -11,3 +11,5 @@ inline string str_format(const char* fmt, T... args) {
     sprintf(buf, fmt, args...);
     return buf;
 }
+
+string read_file(const string &path);

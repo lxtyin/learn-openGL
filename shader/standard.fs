@@ -1,10 +1,5 @@
 
-#version 330 core
 out vec4 FragColor;
-
-#define USE_DIFFUSE_MAP
-#define USE_LIGHT
-#define USE_SPECULAR_MAP
 
 //在世界坐标下运算
 in vec2 uv;
@@ -27,7 +22,7 @@ in vec3 view_pos; //观察者位置
 
     // 默认配比
     uniform float DIFFUSE_RATE = 0.7;
-    uniform float SPECULAR_RATE = 1;
+    uniform float SPECULAR_RATE = 0.5;
 
     // 光源类
     struct Light{

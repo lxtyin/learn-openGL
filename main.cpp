@@ -1,23 +1,18 @@
 #include <bits/stdc++.h>
 #include "glad/glad.h"
 #include "glfw/glfw3.h"
-#include "Shader.h"
-#include "Texture.h"
-#include "Transform.h"
-#include "Light.h"
-#include "tool.h"
-#include "Mesh.h"
-#include "Model.h"
+#include "Renderer.h"
+#include "Camera.h"
 #include "model_loader.h"
-
 using namespace std;
 
 const int SCREEN_W = 1680;
 const int SCREEN_H = 960;
 
-Transform viewTrans, playerTrans; //视点transform，玩家transform
-SurroundLight surroundLight(vec3(0.1, 0.1, 0.1)); //环境光
-ParallelLight parallelLight(glm::vec3(0.5, 0.5, 0.5), glm::vec3(3, -1, 0)); //全局平行光
+Transform playerTrans; // 玩家transform(辅助相机)
+Camera *camera;
+Scene *scene;
+Renderer *renderer;
 
 //鼠标移动回调函数
 float lastTime, detaTime = 0;
@@ -25,33 +20,26 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
     static double mouse_lastX = xpos, mouse_lastY = ypos;
 
     //这里应该是 以自身为中心，按世界的y轴旋转，故在自身坐标系下表示世界y轴
-    glm::vec3 hvec = glm::inverse(viewTrans.transmat) * glm::vec4(0, -1, 0, 0);
-    viewTrans.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, hvec);
-    playerTrans.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, 0, -1, 0);
+    vec3 hvec = glm::inverse(camera->view.transmat) * glm::vec4(0, -1, 0, 0);
+    camera->view.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, hvec);
+    playerTrans.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, vec3(0, -1, 0));
 
-    viewTrans.rotate((float)((ypos - mouse_lastY) * detaTime), -1, 0, 0);
+    camera->view.rotate((float)((ypos - mouse_lastY) * detaTime), vec3(-1, 0, 0));
     mouse_lastX = xpos;
     mouse_lastY = ypos;
 }
 
 //处理按键
 void processInput(GLFWwindow* window) {
-    if(glfwGetKey(window, GLFW_KEY_W)) playerTrans.translate(0, 0, -4 * detaTime);
-    if(glfwGetKey(window, GLFW_KEY_S)) playerTrans.translate(0, 0, 4 * detaTime);
-    if(glfwGetKey(window, GLFW_KEY_D)) playerTrans.translate(4 * detaTime, 0, 0);
-    if(glfwGetKey(window, GLFW_KEY_A)) playerTrans.translate(-4 * detaTime, 0, 0);
-    if(glfwGetKey(window, GLFW_KEY_SPACE)) playerTrans.translate(0, 4 * detaTime, 0);
-    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) playerTrans.translate(0, -4 * detaTime, 0);
-    if(glfwGetKey(window, GLFW_KEY_T)){
-        parallelLight.direction = glm::point_rotate(parallelLight.direction, 2 * detaTime, vec3(0, -1, 0));
-    }
-    if(glfwGetKey(window, GLFW_KEY_Y)){
-        parallelLight.direction = glm::point_rotate(parallelLight.direction, -2 * detaTime, vec3(0, -1, 0));
-    }
+    if(glfwGetKey(window, GLFW_KEY_W)) playerTrans.translate(vec3(0, 0, -4 * detaTime));
+    if(glfwGetKey(window, GLFW_KEY_S)) playerTrans.translate(vec3(0, 0, 4 * detaTime));
+    if(glfwGetKey(window, GLFW_KEY_D)) playerTrans.translate(vec3(4 * detaTime, 0, 0));
+    if(glfwGetKey(window, GLFW_KEY_A)) playerTrans.translate(vec3(-4 * detaTime, 0, 0));
+    if(glfwGetKey(window, GLFW_KEY_SPACE)) playerTrans.translate(vec3(0, 4 * detaTime, 0));
+    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) playerTrans.translate(vec3(0, -4 * detaTime, 0));
 
     if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
-
-    viewTrans.setPosition(playerTrans.position());
+    camera->view.setPosition(playerTrans.position());
 }
 
 //初始化窗口（采用默认设置）
@@ -87,27 +75,42 @@ int main(int argc, const char* argv[]) {
     glEnable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
 
-    // 地形
-    Transform terrainTrans;
-    Dem_Mesh terrainMesh = dem_loader("../terrain/terrain2.dem");
-    terrainMesh.addTexture(Texture("../terrain/terrain2.bmp"), TYPE_DIFFUSE);
-    terrainMesh.addTexture(Texture("../terrain/terrain2_highlight.bmp"), TYPE_SPECULAR);
+    renderer = new Renderer;
+    scene = new Scene();
+    scene->use();
 
-    Shader terrainShader("../shader/standard.vs", "../shader/standard.fs");
+    ParallelLight *light = new ParallelLight(vec3(1, 1, 1));
+    scene->add_light(new SurroundLight(vec3(0.2, 0.2, 0.2)));
+    scene->add_light(light);
 
-    // 设置初始视点：dem正上方，向下看
-    playerTrans.setPosition(0, terrainMesh.mx_height + 4, 0);
-    viewTrans.setPosition(0, terrainMesh.mx_height + 4, 0);
-    viewTrans.setLookAt(glm::vec3(0, 1e9, 0), glm::vec3(0, 0, 1));
+    // terrain
+    Instance *terrain = new Instance;
+    float max_height;
+    terrain->mesh = new Mesh(load_dem("../terrain/terrain1.dem", max_height));
+    terrain->material = new Material;
+    terrain->material->diffuse_map = new Texture("../terrain/terrain1.bmp");
+//    terrain->material->specular_map = new Texture("../terrain/terrain2_highlight.bmp");
+    scene->add_child(terrain);
 
     // 一个箱子
-    Mesh boxMesh(BOX_MESH_SOURCE);
-    Transform boxTrans;
-    Shader boxShader("../shader/color.vs", "../shader/color.fs");
-    PointLight boxLight(vec3(1, 1, 1));
-    boxTrans.setPosition(9, terrainMesh.mx_height + 1, 8);
-    boxTrans.scale(0.3, 0.3, 0.3);
-    boxLight.transform = boxTrans;
+    Instance *box = new Instance;
+    box->mesh = new Mesh(BOX_MESH_SOURCE);
+    box->material = new Material;
+    box->material->use_light = false;
+    box->material->diffuse_color = vec3(1, 1, 0.5);
+    box->transform.setPosition(vec3(0, 0, 20));
+    box->transform.scale(vec3(1, 1, 1));
+
+    Instance *box_center = new Instance;
+    box_center->transform.setPosition(vec3(0, max_height, 0));
+    box_center->add_child(box);
+    scene->add_child(box_center);
+
+    camera = Camera::create_perspective_camera(glm::radians(45.0f), 1.0 * SCREEN_W / SCREEN_H, 0.1f, 1000);
+    camera->use();
+    // 设置初始视点：dem正上方，向下看
+    playerTrans.setPosition(vec3(0, max_height + 4, 0));
+    camera->view.setLookAt(vec3(0, 1e9, 0), vec3(0, 0, 1));
 
     while(!glfwWindowShouldClose(window)) {
         //渲染部分
@@ -115,31 +118,10 @@ int main(int argc, const char* argv[]) {
         //将深度缓冲clear，删掉前一帧的深度信息
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //shader作为状态机
-        terrainShader.use();
+        renderer->render();
 
-
-        //传入必要的变换矩阵
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-            1.0f * SCREEN_W / SCREEN_H, 0.1f, 1000.0f);
-        terrainShader.setMat4("view", viewTrans.transmat);
-        terrainShader.setMat4("projection", projection);
-        terrainShader.setMat4("model", terrainTrans.transmat);
-
-        //应用光照
-        Light::applyAllLightTo(terrainShader);
-
-        terrainMesh.draw(terrainShader);
-
-        // ---
-        boxShader.use();
-        boxShader.setMat4("view", viewTrans.transmat);
-        boxShader.setMat4("projection", projection);
-        boxShader.setMat4("model", boxTrans.transmat);
-        boxMesh.draw(boxShader);
-
-        boxTrans.rotate(detaTime* M_PI / 8, 0, 1, 0, WORLD_SPACE);
-        boxLight.transform = boxTrans;
+        box->transform.rotate(detaTime* M_PI / 8, vec3(1, 0, 0), PARENT_SPACE);
+        light->direction = -box->transform.position();
 
         detaTime = glfwGetTime() - lastTime;//更新detaTime
         lastTime += detaTime;

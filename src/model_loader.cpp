@@ -5,10 +5,9 @@
 using namespace std;
 
 const float INTERVAL = 0.2; //水平间距
-const float HISCALE = 0.03; //高度比例
+const float HISCALE = 0.02; //高度比例
 
-Dem_Mesh dem_loader(const char* path) { //获得mx_height
-
+Mesh load_dem(const char* path, float &max_height) {
     vector<Vertex> vers;
     vector<uint> ids;
     std::ifstream fin(path);
@@ -19,6 +18,7 @@ Dem_Mesh dem_loader(const char* path) { //获得mx_height
     fin >> W >> H;
     fin >> useless >> useless >> useless;
 
+    max_height = -1e9;
     float ht[W][H];
     for(int i = 0;i < W;i++) {
         for(int j = 0;j < H;j++) {
@@ -27,6 +27,7 @@ Dem_Mesh dem_loader(const char* path) { //获得mx_height
                 (i - W / 2) * INTERVAL, ht[i][j] * HISCALE, (j - H / 2) * INTERVAL, //顶点坐标
                 0, 1, 0,                                                            //法线暂定
                 j * 1.0 / H, i * 1.0 / W));                                         //纹理坐标
+            max_height = max(max_height, ht[i][j] * HISCALE);
         }
     }
 
@@ -71,5 +72,6 @@ Dem_Mesh dem_loader(const char* path) { //获得mx_height
         }
     }
     fin.close();
-    return Dem_Mesh(vers, ids);
+    return Mesh(vers, ids);
 }
+

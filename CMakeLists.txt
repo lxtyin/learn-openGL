@@ -18,6 +18,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 link_directories(lib)
-add_executable(openGL ${SRC_FILES})
+add_executable(openGL ${SRC_FILES} src/Material.cpp include/Material.h src/tool.cpp src/Instance.cpp include/Instance.h src/Renderer.cpp include/Renderer.h src/Camera.cpp include/Camera.h)
 
 target_link_libraries(openGL opengl32 glu32 libglfw3.a libzlibstatic.a libassimp.dll.a)

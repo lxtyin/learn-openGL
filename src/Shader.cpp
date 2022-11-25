@@ -1,31 +1,10 @@
 #include "Shader.h"
 #include <iostream>
-#include <fstream>
-#include <sstream>
 using namespace std;
 
-Shader::Shader(const string& vertexShaderPath, const string& fragmentShaderPath) {
-    ifstream vin, fin;
-    string vertexString, fragmentString;
-    //这两行确保ifstream能抛出异常
-    vin.exceptions(ifstream::failbit | ifstream::badbit);
-    fin.exceptions(ifstream::failbit | ifstream::badbit);
-    try {
-        vin.open(vertexShaderPath);
-        fin.open(fragmentShaderPath);
-        stringstream vstream, fstream;
-        vstream << vin.rdbuf();
-        fstream << fin.rdbuf();
-        vertexString = vstream.str();
-        fragmentString = fstream.str();
-        vin.close();
-        fin.close();
-    } catch(std::ifstream::failure e) {
-        cerr << "Fail to read shader file." << endl;
-    }
-
-    const char* vertexShaderCode = vertexString.c_str();
-    const char* fragmentShaderCode = fragmentString.c_str();
+Shader::Shader(const string& vs_program, const string& fs_program) {
+    const char* vertexShaderCode = vs_program.c_str();
+    const char* fragmentShaderCode = fs_program.c_str();
     
     int success;
     char infoLog[512];
@@ -84,3 +63,4 @@ void Shader::setVec3(const string& name, glm::vec3 value) {
 void Shader::setMat4(const string& name, glm::mat4 value, int T) {
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, T, glm::value_ptr(value));
 }
+

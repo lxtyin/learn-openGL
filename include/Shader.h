@@ -12,7 +12,7 @@ using std::string;
 class Shader {
     unsigned int shaderProgram;
 public:
-    Shader(const string &vertexShaderPath, const string &fragmentShaderSource);
+    Shader(const string &vs_program, const string &fs_program);
     void use();
     void setFloat(const string &name, float value);
     void setInt(const string &name, int value);

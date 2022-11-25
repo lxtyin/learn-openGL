@@ -3,6 +3,7 @@
 #include "exglm.hpp"
 #include "Texture.h"
 #include "Shader.h"
+#include "Material.h"
 #include <vector>
 #include <string>
 using std::vector;
@@ -22,28 +23,19 @@ struct Vertex {
     }
 };
 
-const int TYPE_DIFFUSE = 1;
-const int TYPE_SPECULAR = 2;
-
 class Mesh {
 protected:
     vector<Vertex> vertices;
     vector<uint> indices;
-    vector<Texture> diffuse_tex, specular_tex;
     unsigned int VAO, VBO, EBO;
+
+    void initialize();
 public:
     // Mesh(float* datasource);
-    Mesh(const vector<Vertex> &vers); //不使用EBO
-    Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //使用EBO
-    void addTexture(const Texture &tex, int type);
-    void draw(Shader &shader) const;
-};
+    Mesh(const vector<Vertex> &vers); //默认EBO
+    Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //指定EBO
 
-class Dem_Mesh : public Mesh {
-public:
-    float mx_height;
-    Dem_Mesh(const vector<Vertex> &vers); //不使用EBO
-    Dem_Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //使用EBO
+    void draw() const;
 };
 
 extern const vector<Vertex> BOX_MESH_SOURCE;
