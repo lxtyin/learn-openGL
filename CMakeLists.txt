@@ -11,6 +11,10 @@ file(GLOB SRC_FILES
 #        ${PROJECT_SOURCE_DIR}/include/glad/*.h
 #        ${PROJECT_SOURCE_DIR}/include/glm/*.h
 #        ${PROJECT_SOURCE_DIR}/include/glm/*.hpp
+        ${PROJECT_SOURCE_DIR}/src/glad/*.c
+        ${PROJECT_SOURCE_DIR}/src/glad/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/tool/*.c
+        ${PROJECT_SOURCE_DIR}/src/tool/*.cpp
         ${PROJECT_SOURCE_DIR}/src/*.c
         ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
@@ -18,6 +22,5 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 link_directories(lib)
-add_executable(openGL ${SRC_FILES} src/Material.cpp include/Material.h src/tool.cpp src/Instance.cpp include/Instance.h src/Renderer.cpp include/Renderer.h src/Camera.cpp include/Camera.h)
-
+add_executable(openGL ${SRC_FILES})
 target_link_libraries(openGL opengl32 glu32 libglfw3.a libzlibstatic.a libassimp.dll.a)

@@ -2,7 +2,7 @@
 // Created by lx_tyin on 2022/11/24.
 //
 
-#include "tool.h"
+#include "tool/tool.h"
 #include "Material.h"
 #include "Light.h"
 #include "Instance.h"
@@ -42,5 +42,9 @@ void Material::use(){
             light->apply(*shader, str_format("light[%d]", n++));
         }
         shader->setInt("light_N", n);
+    }
+
+    for(auto &[name, value] : extend){
+        shader->setAny(name, value);
     }
 }

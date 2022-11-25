@@ -1,13 +1,13 @@
 #include <fstream>
 #include <iostream>
-#include "model_loader.h"
-#include "exglm.hpp"
+#include "tool/model_loader.h"
+#include "tool/exglm.hpp"
 using namespace std;
 
 const float INTERVAL = 0.2; //水平间距
 const float HISCALE = 0.02; //高度比例
 
-Mesh load_dem(const char* path, float &max_height) {
+Mesh load_dem(const char* path, float &low_height, float &max_height) {
     vector<Vertex> vers;
     vector<uint> ids;
     std::ifstream fin(path);
@@ -18,6 +18,7 @@ Mesh load_dem(const char* path, float &max_height) {
     fin >> W >> H;
     fin >> useless >> useless >> useless;
 
+    low_height = 1e9;
     max_height = -1e9;
     float ht[W][H];
     for(int i = 0;i < W;i++) {
@@ -28,6 +29,7 @@ Mesh load_dem(const char* path, float &max_height) {
                 0, 1, 0,                                                            //法线暂定
                 j * 1.0 / H, i * 1.0 / W));                                         //纹理坐标
             max_height = max(max_height, ht[i][j] * HISCALE);
+            low_height = min(low_height, ht[i][j] * HISCALE);
         }
     }
 

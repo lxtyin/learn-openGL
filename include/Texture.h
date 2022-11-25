@@ -2,7 +2,7 @@
 #define MAIN_CPP_TEXTURE_H
 
 #include "glad/glad.h"
-#include "stb_image.h"
+#include "tool/stb_image.h"
 
 //纹理对象，一张图片
 class Texture{

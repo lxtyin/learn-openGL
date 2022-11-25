@@ -6,6 +6,8 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glad/glad.h"
 #include "glfw/glfw3.h"
+#include "tool/tool.h"
+#include "tool/Any.hpp"
 #include <string>
 using std::string;
 
@@ -14,6 +16,8 @@ class Shader {
 public:
     Shader(const string &vs_program, const string &fs_program);
     void use();
+
+    void setAny(const string &name, const Any &value);
     void setFloat(const string &name, float value);
     void setInt(const string &name, int value);
     void setVec3(const string &name, glm::vec3 value);

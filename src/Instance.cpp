@@ -13,7 +13,7 @@ Transform Instance::transform_global() {
     Transform res = transform;
     Instance *ptr = parent;
     while(ptr != nullptr){
-        res = res * ptr->transform;
+        res = ptr->transform * res;
         ptr = ptr->parent;
     }
     return res;

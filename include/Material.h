@@ -5,16 +5,20 @@
 #ifndef OPENGL_MATERIAL_H
 #define OPENGL_MATERIAL_H
 
-#include "exglm.hpp"
+#include "tool/exglm.hpp"
 #include "Texture.h"
 #include "Shader.h"
+#include "tool/tool.h"
 #include <string>
+#include <map>
 
 using glm::vec3;
 using std::string;
 
 class Material{
 public:
+    std::map<string, Any> extend;     /** <stored extend valuea to be passed to shader. */
+
     Texture *diffuse_map = nullptr;
     vec3 diffuse_color = vec3(1, 0, 1);
 

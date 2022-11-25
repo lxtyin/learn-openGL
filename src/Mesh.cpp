@@ -1,5 +1,5 @@
 #include "Mesh.h"
-#include "tool.h"
+#include "tool/tool.h"
 #include <iostream>
 
 void Mesh::initialize(){

@@ -72,8 +72,8 @@ in vec3 view_pos; //观察者位置
         #ifdef USE_SPECULAR_MAP
             vec3 specular_color = vec3(texture(specular_map, uv));
             vec3 view_dir = normalize(view_pos - frag_pos);
-            vec3 reflect_dir = normalize(reflect(-light_dir, normal)); //方向为入射，法线，出射
-            vec3 specular = l.color * specular_color * pow(max(dot(reflect_dir, view_dir), 0), spininess) * SPECULAR_RATE;
+            vec3 half_dir = normalize(light_dir + view_dir);
+            vec3 specular = l.color * specular_color * pow(max(dot(half_dir, normal), 0), spininess) * SPECULAR_RATE;
             result = result + specular;
         #endif
         return result * decay;

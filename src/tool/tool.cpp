@@ -2,7 +2,7 @@
 // Created by lx_tyin on 2022/11/24.
 //
 
-#include "tool.h"
+#include "tool/tool.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -24,3 +24,4 @@ string read_file(const string &path){
     }
     return res;
 }
+

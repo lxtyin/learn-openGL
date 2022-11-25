@@ -48,6 +48,18 @@ void Shader::use() {
     glUseProgram(shaderProgram);
 }
 
+void Shader::setAny(const string &name, const Any &value) {
+    if(value.type_name == "int") {
+        setInt(name, *(int*)value.value_ptr);
+    } else if(value.type_name == "float") {
+        setFloat(name, *(float*)value.value_ptr);
+    } else if(value.type_name == "vec3") {
+        setVec3(name, *(glm::vec3*)value.value_ptr);
+    } else if(value.type_name == "mat4") {
+        setMat4(name, *(glm::mat4*)value.value_ptr);
+    }
+}
+
 void Shader::setFloat(const string& name, float value) {
     glUniform1f(glGetUniformLocation(shaderProgram, name.c_str()), value);
 }
@@ -61,6 +73,6 @@ void Shader::setVec3(const string& name, glm::vec3 value) {
 }
 
 void Shader::setMat4(const string& name, glm::mat4 value, int T) {
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, T, glm::value_ptr(value));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
