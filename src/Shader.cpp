@@ -53,6 +53,8 @@ void Shader::setAny(const string &name, const Any &value) {
         setInt(name, *(int*)value.value_ptr);
     } else if(value.type_name == "float") {
         setFloat(name, *(float*)value.value_ptr);
+    } else if(value.type_name == "vec2"){
+        setVec2(name, *(glm::vec2*)value.value_ptr);
     } else if(value.type_name == "vec3") {
         setVec3(name, *(glm::vec3*)value.value_ptr);
     } else if(value.type_name == "mat4") {
@@ -66,6 +68,10 @@ void Shader::setFloat(const string& name, float value) {
 
 void Shader::setInt(const string& name, int value) {
     glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
+}
+
+void Shader::setVec2(const string& name, glm::vec2 value) {
+    glUniform2fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, glm::value_ptr(value));
 }
 
 void Shader::setVec3(const string& name, glm::vec3 value) {

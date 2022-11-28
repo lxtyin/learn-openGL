@@ -110,26 +110,29 @@ int main(int argc, const char* argv[]) {
     camera = Camera::create_perspective_camera(glm::radians(45.0f), 1.0 * SCREEN_W / SCREEN_H, 0.1f, 1000);
     camera->use();
 
-    light = new PointLight(vec3(1, 1, 1));
+    light = new PointLight(vec3(1.5, 1.5, 1.5));
     light->decay = vec3(1.0, 0.01, 0.0037);
     scene->add_light(light);
-    scene->add_light(new SurroundLight(vec3(0.1, 0.1, 0.1)));
+    scene->add_light(new SurroundLight(vec3(0.2, 0.2, 0.2)));
 
     // terrain
     terrain = new Instance;
     float low_height, max_height;
-    terrain->mesh = new Mesh(load_dem("../terrain/terrain2.dem", low_height, max_height));
+    terrain->mesh = new Mesh(load_dem("../terrain/terrain1.dem", low_height, max_height));
     scene->add_child(terrain);
 
     // 原色
     terrain_mat[0] = new Material;
     terrain_mat[0]->shader_file = "../shader/standard";
-    terrain_mat[0]->diffuse_map = new Texture("../terrain/terrain2.bmp");
+    terrain_mat[0]->diffuse_map = new Texture("../terrain/terrain1.bmp");
 
-    // 色层
+    // 三种色层
     for(int i = 1;i <= 3;i++){
         terrain_mat[i] = new Material;
         terrain_mat[i]->shader_file = "../shader/color_level";
+        terrain_mat[i]->extend["color_level[0]"] = vec3(1, 1, 0.3);
+        terrain_mat[i]->extend["color_level[1]"] = vec3(0.4, 1, 0.3);
+        terrain_mat[i]->extend["color_level[2]"] = vec3(0.3, 0.7, 1);
         terrain_mat[i]->extend["low_height"] = low_height;
         terrain_mat[i]->extend["max_height"] = max_height;
         terrain_mat[i]->extend["height_level"] = i;

@@ -20,6 +20,7 @@ public:
     void setAny(const string &name, const Any &value);
     void setFloat(const string &name, float value);
     void setInt(const string &name, int value);
+    void setVec2(const string &name, glm::vec2 value);
     void setVec3(const string &name, glm::vec3 value);
     void setMat4(const string &name, glm::mat4 value, int T = GL_FALSE);
 };
