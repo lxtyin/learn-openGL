@@ -41,6 +41,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
  * 0123 切换显示方式（原色，单色层，双色层，三色层）
  * 上下左右键调整光源位置（黄色亮方块指示）
  * O 键旋转DEM
+ * KL 键调整光强
  * ESC 键退出
  */
 void processInput(GLFWwindow* window) {
@@ -57,6 +58,9 @@ void processInput(GLFWwindow* window) {
     if(glfwGetKey(window, GLFW_KEY_RIGHT)) lightbox->transform.rotate(detaTime, vec3(-3, 0, 0), PARENT_SPACE);
 
     if(glfwGetKey(window, GLFW_KEY_O)) terrain->transform.rotate(detaTime, vec3(0, 1, 0));
+
+    if(glfwGetKey(window, GLFW_KEY_K)) light->color += vec3(1, 1, 1) * 3.0f * detaTime;
+    if(glfwGetKey(window, GLFW_KEY_L)) light->color -= vec3(1, 1, 1) * 3.0f * detaTime;
 
     if(glfwGetKey(window, GLFW_KEY_0)) terrain_mat_id = 0;
     if(glfwGetKey(window, GLFW_KEY_1)) terrain_mat_id = 1;
@@ -118,13 +122,13 @@ int main(int argc, const char* argv[]) {
     // terrain
     terrain = new Instance;
     float low_height, max_height;
-    terrain->mesh = new Mesh(load_dem("../terrain/terrain1.dem", low_height, max_height));
+    terrain->mesh = new Mesh(load_dem("../terrain/terrain2.dem", low_height, max_height));
     scene->add_child(terrain);
 
     // 原色
     terrain_mat[0] = new Material;
     terrain_mat[0]->shader_file = "../shader/standard";
-    terrain_mat[0]->diffuse_map = new Texture("../terrain/terrain1.bmp");
+    terrain_mat[0]->diffuse_map = new Texture("../terrain/terrain2.bmp");
 
     // 三种色层
     for(int i = 1;i <= 3;i++){
@@ -146,7 +150,7 @@ int main(int argc, const char* argv[]) {
     lightbox->material = new Material;
     lightbox->material->use_light = false;
     lightbox->material->diffuse_color = vec3(1, 1, 1);
-    lightbox->transform.setPosition(vec3(0, 0, 10));
+    lightbox->transform.setPosition(vec3(0, 5, 5));
     lightbox->transform.scale(vec3(1, 1, 1));
 
     light_center = new Instance;

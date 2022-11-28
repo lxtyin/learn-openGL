@@ -70,12 +70,12 @@ uniform vec3 color_level[3];
 void main() {
     int level = 0;
     float dlt = (max_height - low_height) / height_level;
-    for(int i = 0;i < height_level;i++){
+    for(int i = 1;i < height_level;i++){
         if(frag_pos.y > low_height + dlt * i){
             level++;
         }
     }
-    diffuse_color = color_level[level - 1];
+    diffuse_color = color_level[level];
 
 #ifdef USE_LIGHT
     vec3 result = vec3(0, 0, 0);
