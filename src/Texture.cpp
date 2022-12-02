@@ -1,13 +1,13 @@
 #include "Texture.h"
 #include <iostream>
 
-Texture::Texture(const char* imagePath) {
+Texture::Texture(const string &imagePath) {
     //openGL的图像坐标系是→↑，而一般图像为→↓，故翻转y轴
     stbi_set_flip_vertically_on_load(true);
     //保存图像内存
     try {
         int width, height, channel;
-        unsigned char* data = stbi_load(imagePath, &width, &height, &channel, 0);
+        unsigned char* data = stbi_load(imagePath.c_str(), &width, &height, &channel, 0);
 
         int format;
         if(channel == 1) format = GL_RED;

@@ -8,7 +8,7 @@
  * \param max_height out max height.
  * \return a dem mesh.
  */
-Mesh load_dem(const char* path, float &low_height, float &max_height);
+Mesh load_dem(const string &path, float &low_height, float &max_height);
 
 
 

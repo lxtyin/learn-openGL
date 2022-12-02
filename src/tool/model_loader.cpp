@@ -7,7 +7,7 @@ using namespace std;
 const float INTERVAL = 0.2; //水平间距
 const float HISCALE = 0.02; //高度比例
 
-Mesh load_dem(const char* path, float &low_height, float &max_height) {
+Mesh load_dem(const string &path, float &low_height, float &max_height) {
     vector<Vertex> vers;
     vector<uint> ids;
     std::ifstream fin(path);

@@ -7,13 +7,7 @@ in vec3 normal; //已标准化法线
 in vec3 frag_pos;
 in vec3 view_pos; //观察者位置
 
-vec3 diffuse_color;
-
-uniform float low_height;
-uniform float max_height;
-uniform int height_level;
-
-uniform vec3 color_level[3];
+in vec3 diffuse_color;
 
 #ifdef USE_LIGHT
 
@@ -68,15 +62,6 @@ uniform vec3 color_level[3];
 
 
 void main() {
-    int level = 0;
-    float dlt = (max_height - low_height) / height_level;
-    for(int i = 1;i < height_level;i++){
-        if(frag_pos.y > low_height + dlt * i){
-            level++;
-        }
-    }
-    diffuse_color = color_level[level];
-
 #ifdef USE_LIGHT
     vec3 result = vec3(0, 0, 0);
     for(int i = 0; i < light_N; i++) result += calcuColor(light[i]);

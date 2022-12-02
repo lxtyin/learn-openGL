@@ -8,6 +8,13 @@ out vec3 normal;    //输出法线方向
 out vec3 frag_pos;  //输出片元在世界坐标下位置
 out vec3 view_pos;  //输出观察者在世界坐标下位置
 
+out vec3 diffuse_color;
+
+uniform float low_height;
+uniform float max_height;
+uniform int height_level;
+uniform vec3 color_level[4];
+
 // LOCAL GLOBAL VIEW
 uniform mat4 model;        //模型矩阵 l2g
 uniform mat4 view;         //观察者矩阵 v2g（观察者的坐标系）
@@ -19,4 +26,18 @@ void main() {
     frag_pos = vec3(model * vec4(aPos, 1.0));
     view_pos = vec3(view[3]); //最后一行是观察者的坐标
     uv = aTexpos;
+
+    if(height_level == 1){
+        diffuse_color = color_level[0];
+    } else {
+        int level = 0;
+        float dlt = (max_height - low_height) / (height_level - 1);
+        for(int i = 0;i < height_level - 1;i++){
+            if(frag_pos.y > low_height + dlt * i){
+                level = i;
+            }
+        }
+        float rate = (frag_pos.y - (low_height + dlt * level)) / dlt;
+        diffuse_color = color_level[level] * (1 - rate) + color_level[level + 1] * rate;
+    }
 }

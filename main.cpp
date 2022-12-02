@@ -9,6 +9,9 @@ using namespace std;
 const int SCREEN_W = 1680;
 const int SCREEN_H = 960;
 
+const string DEM_PATH = "../terrain/terrain1.dem";      //dem 模型文件路径s
+const string DEM_TEX_PATH = "../terrain/terrain1.bmp";  //dem 贴图路径
+
 Transform playerTrans; // 玩家transform(辅助相机)
 Camera *camera;
 Scene *scene;
@@ -122,26 +125,25 @@ int main(int argc, const char* argv[]) {
     // terrain
     terrain = new Instance;
     float low_height, max_height;
-    terrain->mesh = new Mesh(load_dem("../terrain/terrain2.dem", low_height, max_height));
+    terrain->mesh = new Mesh(load_dem(DEM_PATH, low_height, max_height));
     scene->add_child(terrain);
 
     // 原色
     terrain_mat[0] = new Material;
     terrain_mat[0]->shader_file = "../shader/standard";
-    terrain_mat[0]->diffuse_map = new Texture("../terrain/terrain2.bmp");
+    terrain_mat[0]->diffuse_map = new Texture(DEM_TEX_PATH);
 
     // 三种色层
     for(int i = 1;i <= 3;i++){
         terrain_mat[i] = new Material;
         terrain_mat[i]->shader_file = "../shader/color_level";
         terrain_mat[i]->extend["color_level[0]"] = vec3(1, 1, 0.3);
-        terrain_mat[i]->extend["color_level[1]"] = vec3(0.4, 1, 0.3);
-        terrain_mat[i]->extend["color_level[2]"] = vec3(0.3, 0.7, 1);
+        terrain_mat[i]->extend["color_level[1]"] = vec3(0.3, 0.7, 1);
+        terrain_mat[i]->extend["color_level[2]"] = vec3(1, 1, 1);
         terrain_mat[i]->extend["low_height"] = low_height;
         terrain_mat[i]->extend["max_height"] = max_height;
         terrain_mat[i]->extend["height_level"] = i;
     }
-
     terrain->material = terrain_mat[0];
 
     // 指示光源的箱子
@@ -151,7 +153,6 @@ int main(int argc, const char* argv[]) {
     lightbox->material->use_light = false;
     lightbox->material->diffuse_color = vec3(1, 1, 1);
     lightbox->transform.setPosition(vec3(0, 5, 5));
-    lightbox->transform.scale(vec3(1, 1, 1));
 
     light_center = new Instance;
     light_center->transform.setPosition(vec3(0, max_height, 0));
