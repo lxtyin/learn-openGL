@@ -1,81 +1,50 @@
 #include <bits/stdc++.h>
 #include "glad/glad.h"
 #include "glfw/glfw3.h"
-#include "Renderer.h"
-#include "Camera.h"
-#include "tool/model_loader.h"
+#include "src/Renderer.h"
+#include "src/Camera.h"
+#include "src/tool/loader.h"
 using namespace std;
 
 const int SCREEN_W = 1680;
 const int SCREEN_H = 960;
 
-const string DEM_PATH = "../terrain/terrain1.dem";      //dem 模型文件路径s
-const string DEM_TEX_PATH = "../terrain/terrain1.bmp";  //dem 贴图路径
-
-Transform playerTrans; // 玩家transform(辅助相机)
+GLFWwindow *window;
 Camera *camera;
 Scene *scene;
 Renderer *renderer;
 
-PointLight *light;
-Instance *terrain;
-Instance *lightbox, *light_center;
-Material *terrain_mat[4]; //四种材质
-int terrain_mat_id = 0;
+Instance *camera_box;
 
-//鼠标移动回调函数
-float lastTime, detaTime = 0;
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-    static double mouse_lastX = xpos, mouse_lastY = ypos;
+float detaTime = 0;
 
-    //这里应该是 以自身为中心，按世界的y轴旋转，故在自身坐标系下表示世界y轴
-    vec3 hvec = glm::inverse(camera->view.transmat) * glm::vec4(0, -1, 0, 0);
-    camera->view.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, hvec);
-    playerTrans.rotate(((xpos - mouse_lastX) * detaTime) * 0.7, vec3(0, -1, 0));
+void update(){
+	if(glfwGetKey(window, GLFW_KEY_W)){
+		camera_box->transform.position += camera_box->transform.direction_z() * -4.0f * detaTime;
+	}
+	if(glfwGetKey(window, GLFW_KEY_S)){
+		camera_box->transform.position += camera_box->transform.direction_z() * 4.0f * detaTime;
+	}
+	if(glfwGetKey(window, GLFW_KEY_D)){
+		camera_box->transform.position +=  camera_box->transform.direction_x() * 4.0f * detaTime;
+	}
+	if(glfwGetKey(window, GLFW_KEY_A)){
+		camera_box->transform.position +=  camera_box->transform.direction_x() * -4.0f * detaTime;
+	}
+	if(glfwGetKey(window, GLFW_KEY_SPACE)) camera_box->transform.position += vec3(0, 4 * detaTime, 0);
+	if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT))  camera_box->transform.position += vec3(0, -4 * detaTime, 0);
 
-    camera->view.rotate((float)((ypos - mouse_lastY) * detaTime), vec3(-1, 0, 0));
-    mouse_lastX = xpos;
-    mouse_lastY = ypos;
+	if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-/*
- * 处理按键
- * WASD Left-Shift Space 控制视点运动
- * 0123 切换显示方式（原色，单色层，双色层，三色层）
- * 上下左右键调整光源位置（黄色亮方块指示）
- * O 键旋转DEM
- * KL 键调整光强
- * ESC 键退出
- */
-void processInput(GLFWwindow* window) {
-    if(glfwGetKey(window, GLFW_KEY_W)) playerTrans.translate(vec3(0, 0, -4 * detaTime));
-    if(glfwGetKey(window, GLFW_KEY_S)) playerTrans.translate(vec3(0, 0, 4 * detaTime));
-    if(glfwGetKey(window, GLFW_KEY_D)) playerTrans.translate(vec3(4 * detaTime, 0, 0));
-    if(glfwGetKey(window, GLFW_KEY_A)) playerTrans.translate(vec3(-4 * detaTime, 0, 0));
-    if(glfwGetKey(window, GLFW_KEY_SPACE)) playerTrans.translate(vec3(0, 4 * detaTime, 0));
-    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)) playerTrans.translate(vec3(0, -4 * detaTime, 0));
-
-    if(glfwGetKey(window, GLFW_KEY_UP)) lightbox->transform.translate(vec3(0, 0, 4 * detaTime));
-    if(glfwGetKey(window, GLFW_KEY_DOWN)) lightbox->transform.translate(vec3(0, 0, -4 * detaTime));
-    if(glfwGetKey(window, GLFW_KEY_LEFT)) lightbox->transform.rotate(detaTime, vec3(3, 0, 0), PARENT_SPACE);
-    if(glfwGetKey(window, GLFW_KEY_RIGHT)) lightbox->transform.rotate(detaTime, vec3(-3, 0, 0), PARENT_SPACE);
-
-    if(glfwGetKey(window, GLFW_KEY_O)) terrain->transform.rotate(detaTime, vec3(0, 1, 0));
-
-    if(glfwGetKey(window, GLFW_KEY_K)) light->color += vec3(1, 1, 1) * 3.0f * detaTime;
-    if(glfwGetKey(window, GLFW_KEY_L)) light->color -= vec3(1, 1, 1) * 3.0f * detaTime;
-
-    if(glfwGetKey(window, GLFW_KEY_0)) terrain_mat_id = 0;
-    if(glfwGetKey(window, GLFW_KEY_1)) terrain_mat_id = 1;
-    if(glfwGetKey(window, GLFW_KEY_2)) terrain_mat_id = 2;
-    if(glfwGetKey(window, GLFW_KEY_3)) terrain_mat_id = 3;
-
-    terrain->material = terrain_mat[terrain_mat_id];
-
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
-
-    camera->view.setPosition(playerTrans.position());
-    light->transform = lightbox->transform_global();
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+    static double mouse_lastX = xpos, mouse_lastY = ypos;
+	double dx = xpos - mouse_lastX;
+	double dy = ypos - mouse_lastY;
+	camera_box->transform.rotation += vec3(0, dx, 0) / 400.0f;
+	camera->transform.rotation += vec3(dy, 0, 0) / 400.0f;
+    mouse_lastX = xpos;
+    mouse_lastY = ypos;
 }
 
 //初始化窗口（采用默认设置）
@@ -100,69 +69,62 @@ GLFWwindow* initWindow() {
 
 int main(int argc, const char* argv[]) {
 
-    auto* window = initWindow();
+    window = initWindow();
     //初始化glad
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     
     //设置清空屏幕用的颜色，即背景颜色
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
     //启用深度测试
     glEnable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
 
-    renderer = new Renderer;
     scene = new Scene();
-    scene->use();
     camera = Camera::create_perspective_camera(glm::radians(45.0f), 1.0 * SCREEN_W / SCREEN_H, 0.1f, 1000);
-    camera->use();
 
-    light = new PointLight(vec3(1.5, 1.5, 1.5));
+	renderer = new Renderer(scene, camera);
+
+	camera_box = new Instance;
+	scene->add_child(camera_box);
+	camera_box->add_child(camera);
+
+	scene->add_light(new SurroundLight(vec3(0.2, 0.2, 0.2)));
+	PointLight* light = new PointLight(vec3(1.5, 1.5, 1.5));
     light->decay = vec3(1.0, 0.01, 0.0037);
     scene->add_light(light);
-    scene->add_light(new SurroundLight(vec3(0.2, 0.2, 0.2)));
+	DirectionalLight* light2 = new DirectionalLight(vec3(0.5, 0.5, 0.5));
+	scene->add_light(light2);
 
     // terrain
-    terrain = new Instance;
+    Instance* terrain = new Instance;
     float low_height, max_height;
-    terrain->mesh = new Mesh(load_dem(DEM_PATH, low_height, max_height));
+    terrain->mesh = Loader::load_dem("terrain/terrain2.dem", low_height, max_height);
     scene->add_child(terrain);
 
-    // 原色
-    terrain_mat[0] = new Material;
-    terrain_mat[0]->shader_file = "../shader/standard";
-    terrain_mat[0]->diffuse_map = new Texture(DEM_TEX_PATH);
+	// house
+	Instance *house = Loader::load_model("models/Lowpoly_tree_sample.obj");
+	scene->add_child(house);
 
-    // 三种色层
-    for(int i = 1;i <= 3;i++){
-        terrain_mat[i] = new Material;
-        terrain_mat[i]->shader_file = "../shader/color_level";
-        terrain_mat[i]->extend["color_level[0]"] = vec3(1, 1, 0.3);
-        terrain_mat[i]->extend["color_level[1]"] = vec3(0.3, 0.7, 1);
-        terrain_mat[i]->extend["color_level[2]"] = vec3(1, 1, 1);
-        terrain_mat[i]->extend["low_height"] = low_height;
-        terrain_mat[i]->extend["max_height"] = max_height;
-        terrain_mat[i]->extend["height_level"] = i;
-    }
-    terrain->material = terrain_mat[0];
+    // 原色
+    terrain->material = new Material;
+	terrain->material->diffuse_map = new Texture("terrain/terrain2.bmp");
 
     // 指示光源的箱子
-    lightbox = new Instance;
+    Instance *lightbox = new Instance;
     lightbox->mesh = new Mesh(BOX_MESH_SOURCE);
     lightbox->material = new Material;
     lightbox->material->use_light = false;
-    lightbox->material->diffuse_color = vec3(1, 1, 1);
-    lightbox->transform.setPosition(vec3(0, 5, 5));
+    lightbox->material->diffuse_color = vec3(0.8, 0.8, 1);
+    lightbox->transform.position = vec3(0, 5, 0);
 
-    light_center = new Instance;
-    light_center->transform.setPosition(vec3(0, max_height, 0));
-    light_center->add_child(lightbox);
-    scene->add_child(light_center);
+	light->transform = lightbox->transform;
 
-    // 设置初始视点：dem正上方，向下看
-    playerTrans.setPosition(vec3(0, max_height + 4, 0));
-    camera->view.setLookAt(vec3(0, 1e9, 0), vec3(0, 0, 1));
+	scene->add_child(lightbox);
 
+	camera_box->transform.position = vec3(0, max_height + 10, 0);
+
+	float last_time = glfwGetTime();
     while(!glfwWindowShouldClose(window)) {
         //渲染部分
         //将颜色缓冲clear，即变成背景颜色
@@ -171,9 +133,10 @@ int main(int argc, const char* argv[]) {
 
         renderer->render();
 
-        detaTime = glfwGetTime() - lastTime;//更新detaTime
-        lastTime += detaTime;
-        processInput(window);//处理按键
+        detaTime = glfwGetTime() - last_time;//更新detaTime
+		last_time += detaTime;
+        update();
+
         glfwSwapBuffers(window); //交换两层颜色缓冲
         glfwPollEvents();//检查有没有发生事件，调用相应回调函数
     }

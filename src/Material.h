@@ -27,7 +27,7 @@ public:
 
     bool use_light = true;
 
-    string shader_file = "../shader/standard";
+    string shader_file = "shader/standard";
     Shader *shader = nullptr;
 
     Material() = default;

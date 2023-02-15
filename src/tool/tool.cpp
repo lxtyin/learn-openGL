@@ -2,7 +2,7 @@
 // Created by lx_tyin on 2022/11/24.
 //
 
-#include "tool/tool.h"
+#include "tool.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>

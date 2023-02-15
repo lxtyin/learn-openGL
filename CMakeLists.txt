@@ -3,20 +3,14 @@ project(openGL)
 
 file(GLOB SRC_FILES
         ${PROJECT_SOURCE_DIR}/main.cpp
-        ${PROJECT_SOURCE_DIR}/include/*.h
         ${PROJECT_SOURCE_DIR}/include/*.hpp
-#        ${PROJECT_SOURCE_DIR}/include/assimp/*.h
-#        ${PROJECT_SOURCE_DIR}/include/assimp/*.hpp
-#        ${PROJECT_SOURCE_DIR}/include/glfw/*.h
-#        ${PROJECT_SOURCE_DIR}/include/glad/*.h
-#        ${PROJECT_SOURCE_DIR}/include/glm/*.h
-#        ${PROJECT_SOURCE_DIR}/include/glm/*.hpp
-        ${PROJECT_SOURCE_DIR}/src/glad/*.c
-        ${PROJECT_SOURCE_DIR}/src/glad/*.cpp
+        ${PROJECT_SOURCE_DIR}/include/glad/*.c
+        ${PROJECT_SOURCE_DIR}/src/*.h
+        ${PROJECT_SOURCE_DIR}/src/*.c
+        ${PROJECT_SOURCE_DIR}/src/*.cpp
         ${PROJECT_SOURCE_DIR}/src/tool/*.c
         ${PROJECT_SOURCE_DIR}/src/tool/*.cpp
-        ${PROJECT_SOURCE_DIR}/src/*.c
-        ${PROJECT_SOURCE_DIR}/src/*.cpp)
+        )
 
 set(CMAKE_CXX_STANDARD 17)
 

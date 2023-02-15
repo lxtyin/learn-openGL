@@ -26,7 +26,7 @@ in vec3 view_pos; //观察者位置
 
     // 光源类
     struct Light{
-        //三种类型的光源 0-Parallel 1-Point 2-Spot 3-Surround
+        //三种类型的光源 0-Directional 1-Point 2-Spot 3-Surround
         int type;
         //携带信息
         vec3 direction;

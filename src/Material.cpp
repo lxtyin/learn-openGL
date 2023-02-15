@@ -6,6 +6,7 @@
 #include "Material.h"
 #include "Light.h"
 #include "Instance.h"
+#include "Renderer.h"
 
 void Material::update_shader(){
     string head = "#version 330 core\n";
@@ -38,7 +39,7 @@ void Material::use(){
 
     if(use_light){
         int n = 0;
-        for(Light *light : Scene::current_scene->lights){
+        for(Light *light : Renderer::current_scene->lights){
             light->apply(*shader, str_format("light[%d]", n++));
         }
         shader->setInt("light_N", n);

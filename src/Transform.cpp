@@ -1,59 +1,74 @@
 #include "Transform.h"
+#include "Instance.h"
+#include <algorithm>
+#include <iostream>
+
 using namespace std;
 
-//初始单位矩阵 和世界坐标重合
-Transform::Transform() : transmat(1.0f) {}
+Transform::Transform() :
+	position(vec3(0, 0, 0)),
+	rotation(vec3(0, 0, 0)),
+	scale(vec3(1, 1, 1)){}
 
-Transform::Transform(const mat4 &mt) : transmat(mt) {}
+Transform::Transform(vec3 position, vec3 rotation, vec3 scale) :
+	position(position),
+	rotation(rotation),
+	scale(scale){}
 
-Transform::Transform(vec3 position, vec3 scale, vec3 rotation, const char *rule){
-    transmat = mat4(1.0f);
-    for(int i = 0;i < 3;i++){
-        if(rule[i] == 'X'){
-            transmat = glm::rotate(transmat, rotation.x, vec3(1, 0, 0)); // rotate in local space.
-        } else if(rule[i] == 'Y'){
-            transmat = glm::rotate(transmat, rotation.y, vec3(0, 1, 0));
-        } else if(rule[i] == 'Z'){
-            transmat = glm::rotate(transmat, rotation.z, vec3(0, 0, 1));
-        }
-    }
-    transmat = glm::translate(position, transmat);  // move in world space
-    transmat = glm::scale(transmat, scale);
+mat4 Transform::matrix() {
+	mat4 s{ scale.x, 0, 0, 	0,
+			0, scale.y, 0, 	0,
+			0, 0, scale.z, 	0,
+			0, 0, 0,		1 };
+	float x = rotation.x;
+	float y = rotation.y;
+	float z = rotation.z;
+	mat4 rot_x{ 1,		0,		0,		0,
+				0,		cos(x),	-sin(x),0,
+				0,		sin(x),	cos(x),	0,
+				0, 		0,	 	0,		1};
+	mat4 rot_y{ cos(y), 0,		sin(y), 0,
+				0, 		1,		0,		0,
+				-sin(y),0,		cos(y), 0,
+				0, 		0,		0, 		1 };
+	mat4 rot_z{ cos(z), -sin(z),0, 		0,
+				sin(z), cos(z), 0, 		0,
+				0, 	 	0,	   	1, 		0,
+				0,   	0,  	0, 		1 };
+	mat4 res(1);
+	for(char c: order){
+		if(c == 'X') res *= rot_x;
+		if(c == 'Y') res *= rot_y;
+		if(c == 'Z') res *= rot_z;
+
+	}
+	res *= s;
+	res[3] = {position, 1};
+	return res;
 }
 
-void Transform::translate(glm::vec3 v, int space_mode) {
-    if(space_mode == LOCAL_SPACE) {
-        transmat = glm::translate(transmat, v);
-    } else if(space_mode == PARENT_SPACE) {
-        transmat = glm::translate(v, transmat);
-    }
+void Transform::set_order(string o)
+{
+	if (o.size() == 3)
+	{
+		std::sort(o.begin(), o.end());
+		if (o == "XYZ")
+		{
+			order = o;
+		}
+		else
+		{
+			std::cerr << "Transform: order string error." << std::endl;
+		}
+	}
 }
 
-void Transform::rotate(float angle, glm::vec3 v, int space_mode) {
-    if(space_mode == LOCAL_SPACE) {
-        transmat = glm::rotate(transmat, angle, v);
-    } else if(space_mode == PARENT_SPACE) {
-        transmat = glm::rotate(angle, v, transmat);
-    }
+vec3 Transform::direction_x() {
+	return matrix()[0];
 }
-
-void Transform::scale(glm::vec3 v) {
-    transmat = glm::scale(transmat, v);
+vec3 Transform::direction_y() {
+	return matrix()[1];
 }
-
-glm::vec3 Transform::position() {
-    return transmat[3];
-}
-
-void Transform::setPosition(glm::vec3 v) {
-    transmat[3] = glm::vec4(v, 1.0);
-}
-
-void Transform::setLookAt(glm::vec3 tar, glm::vec3 vup) {
-    glm::vec3 pos = position();
-    transmat = glm::lookAt(pos, tar, vup);
-}
-
-Transform Transform::operator*(const Transform &t) const{
-    return Transform(transmat * t.transmat);
+vec3 Transform::direction_z() {
+	return matrix()[2];
 }

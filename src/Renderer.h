@@ -6,6 +6,7 @@
 #define OPENGL_RENDERER_H
 
 #include "Instance.h"
+#include "Camera.h"
 
 class Renderer{
 
@@ -14,12 +15,20 @@ class Renderer{
      * \param cur current instance.
      * \param t Transform to global.
      */
-    void render_instance(Instance *cur, Transform t);
+    void render_instance(Instance *cur, mat4 t);
 
 public:
 
+	static Scene* current_scene;			/** < is setted before render */
+	static Camera* current_camera;			/** < is setted before render */
+
+	Scene *scene = nullptr;
+	Camera *camera = nullptr;
+
+	Renderer(Scene *s, Camera *c);
+
     /**
-     * render all (in current_scene).
+     * render all.
      */
     void render();
 };

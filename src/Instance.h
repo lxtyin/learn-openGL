@@ -22,11 +22,7 @@ public:
     Instance() = default;
     Instance(Instance *p);
 
-    /**
-     * get transform to global.
-     * \return global transform.
-     */
-    Transform transform_global();
+	mat4 matrix_to_global();
 
     /**
      * get parent in instance-tree.
@@ -57,14 +53,8 @@ public:
 class Scene : public Instance {
 public:
     vector<Light*> lights;
-    static Scene* current_scene;
 
     Scene() = default;
-
-    /**
-     * switch to this scene.
-     */
-    void use();
 
     /**
      * use a light in scene.

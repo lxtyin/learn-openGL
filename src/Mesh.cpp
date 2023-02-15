@@ -2,7 +2,8 @@
 #include "tool/tool.h"
 #include <iostream>
 
-void Mesh::initialize(){
+void Mesh::load() {
+	is_load = true;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -26,18 +27,23 @@ void Mesh::initialize(){
     glBindVertexArray(0);//unbind VAO
 }
 
+void Mesh::unload() {
+	is_load = false;
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+}
+
 Mesh::Mesh(const vector<Vertex> &vers) :
     vertices(vers), indices(vers.size(), 0) {
     for(int i = 0;i < vers.size();i++) indices[i] = i;
-    initialize();
 }
 
 Mesh::Mesh(const vector<Vertex> &vers, const vector<uint> &ids) :
-    vertices(vers), indices(ids) {
-    initialize();
-}
+    vertices(vers), indices(ids) {}
 
-void Mesh::draw() const {
+void Mesh::draw() {
+	if(!is_load) load();
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

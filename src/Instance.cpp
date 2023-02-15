@@ -9,16 +9,6 @@ Instance::Instance(Instance *p) {
     p->children.push_back(p);
 }
 
-Transform Instance::transform_global() {
-    Transform res = transform;
-    Instance *ptr = parent;
-    while(ptr != nullptr){
-        res = ptr->transform * res;
-        ptr = ptr->parent;
-    }
-    return res;
-}
-
 Instance *Instance::get_parent() {
     return parent;
 }
@@ -46,10 +36,9 @@ int Instance::add_child(Instance *cd) {
     return (int)children.size() - 1;
 }
 
-Scene* Scene::current_scene = nullptr;
-
-void Scene::use(){
-    current_scene = this;
+mat4 Instance::matrix_to_global() {
+	if(parent == nullptr) return transform.matrix();
+	return parent->matrix_to_global() * transform.matrix();
 }
 
 void Scene::add_light(Light *light){

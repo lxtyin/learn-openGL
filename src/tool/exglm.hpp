@@ -3,6 +3,9 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include <iostream>
+using std::ostream;
+using std::cout;
 
 namespace glm {
     //扩展矩阵左乘 仿照glm加速。
@@ -24,5 +27,18 @@ namespace glm {
         return rotate(mat4(1.0f), angle, v) * vec4(ori, 1.0);
     }
 
-    //参考父坐标缩放好像没有太大意义
+	inline ostream& operator << (ostream &f, const mat4 &m) {
+		for(int i = 0;i < 4;i++){
+			for(int j = 0;j < 4;j++){
+				f << m[i][j] << " \n"[j == 3];
+			}
+		}
+		return f;
+	}
+	inline ostream& operator << (ostream &f, const vec3 &v) {
+		for(int i = 0;i < 3;i++){
+			f << v[i] << " \n"[i == 2];
+		}
+		return f;
+	}
 }

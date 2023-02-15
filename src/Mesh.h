@@ -29,13 +29,16 @@ protected:
     vector<uint> indices;
     unsigned int VAO, VBO, EBO;
 
-    void initialize();
+	bool is_load = false;
 public:
-    // Mesh(float* datasource);
-    Mesh(const vector<Vertex> &vers); //默认EBO
+
+	void load();	/** < load to gpu */
+	void unload();	/** < unload from gpu */
+
+    explicit Mesh(const vector<Vertex> &vers); //默认EBO
     Mesh(const vector<Vertex> &vers, const vector<uint> &ids); //指定EBO
 
-    void draw() const;
+    void draw();
 };
 
 extern const vector<Vertex> BOX_MESH_SOURCE;

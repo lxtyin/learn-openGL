@@ -3,7 +3,7 @@
 
 Light::Light(vec3 c) : color(c) {}
 
-ParallelLight::ParallelLight(vec3 c, vec3 direction) :
+DirectionalLight::DirectionalLight(vec3 c, vec3 direction) :
     Light(c),
     direction(direction) {}
 
@@ -27,28 +27,28 @@ void Light::apply(Shader& s, const string& name) {
     s.setVec3(name + ".color", color);
 }
 
-void ParallelLight::apply(Shader& s, const string& name) {
+void DirectionalLight::apply(Shader& s, const string& name) {
     Light::apply(s, name);
     s.setVec3(name + ".direction", direction);
-    s.setInt(name + ".type", TYPE_PARALLEL);
+    s.setInt(name + ".type", TYPE_DIRECTION);
 }
 
 void PointLight::apply(Shader& s, const string& name) {
     Light::apply(s, name);
-    s.setVec3(name + ".position", transform.position());
+    s.setVec3(name + ".position", transform.position);
     s.setVec3(name + ".decay", decay);
     s.setInt(name + ".type", TYPE_POINT);
 }
 
 void SpotLight::apply(Shader& s, const string& name) {
     Light::apply(s, name);
-    s.setVec3(name + ".position", transform.position());
+    s.setVec3(name + ".position", transform.position);
     s.setVec3(name + ".decay", decay);
     s.setFloat(name + ".inCut", glm::cos(glm::radians(angleIn)));
     s.setFloat(name + ".outCut", glm::cos(glm::radians(angleOut)));
     s.setInt(name + ".type", TYPE_SPOT);
 
-    vec3 dir = transform.transmat * vec4(direction, 0.0); //计算direction在世界坐标下的方向，注意不位移
+    vec3 dir = transform.matrix() * vec4(direction, 0.0); //计算direction在世界坐标下的方向，注意不位移
     s.setVec3(name + ".direction", dir);
 }
 

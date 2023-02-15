@@ -13,7 +13,7 @@ using glm::vec4;
 using std::string;
 using std::set;
 
-const int TYPE_PARALLEL = 0;
+const int TYPE_DIRECTION = 0;
 const int TYPE_POINT = 1;
 const int TYPE_SPOT = 2;
 const int TYPE_SURROUND = 3;
@@ -33,10 +33,17 @@ public:
 };
 
 //平行光 独立存在 和物体无关
-class ParallelLight : public Light {
+class DirectionalLight : public Light {
 public:
     vec3 direction; //照射方向
-    ParallelLight(vec3 c, vec3 direction = vec3(0, -1, 0));
+
+	/**
+	 * create directional light.
+	 * \param c color
+	 * \param direction
+	 */
+	DirectionalLight(vec3 c, vec3 direction = vec3(0, -1, 0));
+
     void apply(Shader& s, const string& name) override;
 };
 
