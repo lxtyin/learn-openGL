@@ -1,25 +1,24 @@
 //
-// Created by lx_tyin on 2022/11/24.
+// Created by lx_tyin on 2023/3/5.
 //
 
-#include "tool/tool.h"
-#include "Material.h"
-#include "Light.h"
-#include "Instance.h"
-#include "Renderer.h"
+#include "PhongMaterial.h"
+#include "../Light.h"
+#include "../Instance.h"
+#include "../Renderer.h"
 
-void Material::update_shader(){
+void PhongMaterial::update_shader() {
     string head = "#version 330 core\n";
     if(use_light)    head += "#define USE_LIGHT\n";
     if(diffuse_map)  head += "#define USE_DIFFUSE_MAP\n";
     if(specular_map) head += "#define USE_SPECULAR_MAP\n";
 
-    string vs_program = head + read_file(shader_file + ".vs");
-    string fs_program = head + read_file(shader_file + ".fs");
+    string vs_program = head + read_file("shader/standard.vert");
+    string fs_program = head + read_file("shader/standard.frag");
     shader = new Shader(vs_program, fs_program);
 }
 
-void Material::use(){
+void PhongMaterial::use() {
     if(!shader) update_shader();
     shader->use();
 
@@ -28,15 +27,13 @@ void Material::use(){
         shader->setInt("diffuse_map", active_id);
         diffuse_map->activeTarget(active_id++);
     } else {
-        shader->setVec3("diffuse_color", diffuse_color);
+        shader->setVec3("diffuse_color", base_color);
     }
-
     if(specular_map){
         shader->setFloat("spininess", spininess);
         shader->setInt("specular_map", active_id);
         specular_map->activeTarget(active_id++);
     }
-
     if(use_light){
         int n = 0;
         for(Light *light : Renderer::current_scene->lights){
@@ -44,7 +41,6 @@ void Material::use(){
         }
         shader->setInt("light_N", n);
     }
-
     for(auto &[name, value] : extend){
         shader->setAny(name, value);
     }

@@ -6,7 +6,7 @@
 #include "../Mesh.h"
 #include "../Texture.h"
 #include "../Instance.h"
-#include "../Material.h"
+#include "../material/Material.h"
 
 namespace Loader{
 	/**

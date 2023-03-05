@@ -4,7 +4,7 @@ layout (location = 1) in vec3 aNor;   // 法线方向
 layout (location = 2) in vec2 aTexpos;// 纹理坐标
 
 out vec2 uv;        //输出纹理坐标
-out vec3 normal;    //输出法线方向
+out vec3 normal;    //输出法线方向（世界坐标）
 out vec3 frag_pos;  //输出片元在世界坐标下位置
 out vec3 view_pos;  //输出观察者在世界坐标下位置
 

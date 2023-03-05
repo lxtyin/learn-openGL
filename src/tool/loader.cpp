@@ -2,6 +2,8 @@
 #include <iostream>
 #include "loader.h"
 #include "exglm.hpp"
+#include "../material/DisneyMaterial.h"
+#include "../material/PhongMaterial.h"
 using namespace std;
 
 const float INTERVAL = 0.2; //水平间距
@@ -105,12 +107,13 @@ namespace Loader{
 	}
 
 	Material* processMaterial(aiMaterial *mat, const aiScene *scene){
-		Material *result = new Material;
+        // 暂且固定disney material
+        DisneyMaterial *result = new DisneyMaterial;
 
 		// 获取各项属性
 		aiColor3D color;
 		if(AI_SUCCESS == mat->Get(AI_MATKEY_COLOR_DIFFUSE, color)){
-			result->diffuse_color = vec3(color.r, color.g, color.b);
+			result->base_color = vec3(color.r, color.g, color.b);
 		}
 
 		// 获取纹理
@@ -191,6 +194,10 @@ namespace Loader{
 		while(!directory.empty() && directory.back() != '/' && directory.back() != '\\') directory.pop_back();
 
 		Instance *result = processNode(scene->mRootNode, scene);
+		// 有时会莫名整个旋转
+		result->transform.scale = vec3(1);
+		result->transform.rotation = vec3(0);
+		result->transform.position = vec3(0);
 		return result;
 	}
 }

@@ -3,7 +3,7 @@
 #include "tool/exglm.hpp"
 #include "Texture.h"
 #include "Shader.h"
-#include "Material.h"
+#include "material/Material.h"
 #include <vector>
 #include <string>
 using std::vector;

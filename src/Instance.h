@@ -6,7 +6,7 @@
 #define OPENGL_INSTANCE_H
 
 #include "Mesh.h"
-#include "Material.h"
+#include "material/Material.h"
 #include "Transform.h"
 #include "Light.h"
 
@@ -24,22 +24,10 @@ public:
 
 	mat4 matrix_to_global();
 
-    /**
-     * get parent in instance-tree.
-     * \return parent
-     */
     Instance* get_parent();
 
-    /**
-     * get idx'th child in instance-tree.
-     * \param idx
-     * \return
-     */
     Instance* get_child(int idx);
 
-    /**
-     * update parent, meanwhile update parent's children list.
-     */
     void set_parent(Instance *p);
 
     /**

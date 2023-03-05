@@ -17,12 +17,11 @@ const int TYPE_DIRECTION = 0;
 const int TYPE_POINT = 1;
 const int TYPE_SPOT = 2;
 const int TYPE_SURROUND = 3;
-const vec3 DEFAULT_DECAY(1.0f, 0.09f, 0.032f); //默认衰减
 
 class Light {
 public:
-    vec3 color;
-    Light(vec3 c);
+    vec3 emission;
+    Light(vec3 emi);
 
     /**
      * add light to a shader(as uniform).
@@ -37,12 +36,7 @@ class DirectionalLight : public Light {
 public:
     vec3 direction; //照射方向
 
-	/**
-	 * create directional light.
-	 * \param c color
-	 * \param direction
-	 */
-	DirectionalLight(vec3 c, vec3 direction = vec3(0, -1, 0));
+	DirectionalLight(vec3 emi, vec3 direction = vec3(0, -1, 0));
 
     void apply(Shader& s, const string& name) override;
 };
@@ -51,9 +45,8 @@ public:
 class PointLight : public Light {
 public:
     Transform transform;
-    vec3 decay;
-    
-    PointLight(vec3 c);
+
+    PointLight(vec3 emi);
     void apply(Shader& s, const string& name) override;
 };
 
@@ -61,16 +54,15 @@ public:
 class SpotLight : public Light {
 public:
     Transform transform;
-    vec3 decay;
     vec3 direction; //照射方向
     float angleIn, angleOut; //角度值
-    
-    SpotLight(vec3 c, float agin, float agout, vec3 direction = vec3(0, -1, 0));
+
+    SpotLight(vec3 emi, float agin, float agout, vec3 direction = vec3(0, -1, 0));
     void apply(Shader& s, const string& name) override;
 };
 
 class SurroundLight : public Light {
 public:
-    SurroundLight(vec3 c);
+    SurroundLight(vec3 emi);
     void apply(Shader& s, const string& name) override;
 };

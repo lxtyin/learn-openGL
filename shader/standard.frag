@@ -31,19 +31,11 @@ in vec3 view_pos; //观察者位置
         //携带信息
         vec3 direction;
         vec3 position;
-        vec3 decay;
         float inCut, outCut; //两个圆锥边界的余弦
-        //颜色 * 强度
-        vec3 color;
+        vec3 emission;
     };
     uniform Light light[16];
     uniform int light_N;
-
-    float decayValue(Light light){ //距离衰减
-        float dist = length(light.position - frag_pos);
-        vec3 tmp = vec3(1.0, dist, dist * dist) * light.decay;
-        return 1.0 / (tmp.x + tmp.y + tmp.z);
-    }
 
     vec3 calcuColor(Light l){
         vec3 light_dir;     //指向光源的向量
@@ -55,25 +47,27 @@ in vec3 view_pos; //观察者位置
 
         if(l.type == 0){
             light_dir = normalize(-l.direction);
-            decay = 1;
+            decay = 1.0f;
         }else if(l.type == 1){
             light_dir = normalize(l.position - frag_pos);
-            decay = decayValue(l);
+            float d = length(l.position - frag_pos);
+            decay = 1.0 / (d * d);
         }else if(l.type == 2){
             light_dir = normalize(l.position - frag_pos);
             float cs = dot(light_dir, normalize(-l.direction));
             float ad = clamp((cs - l.outCut) / (l.inCut - l.outCut), 0.0, 1.0);
-            decay = decayValue(l) * ad;
+            float d = length(l.position - frag_pos);
+            decay = 1.0 / (d * d);
         }else if(l.type == 3){
-            return l.color * diffuse_color;
+            return l.emission * diffuse_color;
         }
 
-        vec3 result = l.color * diffuse_color * max(dot(light_dir, normal), 0) * DIFFUSE_RATE;
+        vec3 result = l.emission * diffuse_color * max(dot(light_dir, normal), 0.) * DIFFUSE_RATE;
         #ifdef USE_SPECULAR_MAP
             vec3 specular_color = vec3(texture(specular_map, uv));
             vec3 view_dir = normalize(view_pos - frag_pos);
             vec3 half_dir = normalize(light_dir + view_dir);
-            vec3 specular = l.color * specular_color * pow(max(dot(half_dir, normal), 0), spininess) * SPECULAR_RATE;
+            vec3 specular = l.emission * specular_color * pow(max(dot(half_dir, normal), 0.), spininess) * SPECULAR_RATE;
             result = result + specular;
         #endif
         return result * decay;

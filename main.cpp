@@ -17,18 +17,6 @@ Renderer *renderer;
 Instance *camera_box;
 float detaTime = 0;
 
-vector<pair<Instance*, vec3>> boxes;
-glm::mat4 input_transform;
-void get_input() {
-    ifstream f_m("matrix.txt");
-    for(int i = 0;i < 4;i++){
-        for(int j = 0;j < 4;j++){
-            f_m >> input_transform[i][j];
-        }
-    }
-    f_m.close();
-}
-
 void init() {
 
     glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
@@ -43,50 +31,12 @@ void init() {
     camera_box->add_child(camera);
 
     scene->add_light(new SurroundLight(vec3(0.2, 0.2, 0.2)));
-    scene->add_light(new DirectionalLight(vec3(0.7, 0.7, 0.7), vec3(0, -1, -2)));
+    scene->add_light(new DirectionalLight(vec3(1, 1, 1), vec3(0, -1, -2)));
 
-    Mesh *box_mesh = new Mesh(BOX_MESH_SOURCE);
+    Instance *ground = Loader::load_model("models/casa_obj.glb");
+    ground->transform.rotation = vec3(M_PI / 2, 0, 0);
+    scene->add_child(ground);
 
-    get_input();
-    for(int i = -4;i <= 4; i++){
-        for(int j = -4;j <= 4; j++){
-            for(int k = -4;k <= 4; k++){
-                auto *box = new Instance;
-                box->mesh = box_mesh;
-                box->material = new Material;
-                box->material->diffuse_color = vec3((i + 3.0) / 6, (j + 3.0) / 6, (k + 3.0) / 6);
-                box->transform.position = vec3(i, j, k);
-                box->transform.scale = vec3(0.1f, 0.1f, 0.1f);
-                scene->add_child(box);
-                auto tar = vec4(box->transform.position, 1) * input_transform;
-                boxes.push_back({box, vec3(tar / tar[3])});
-            }
-        }
-    }
-
-    auto *x_line = new Instance;
-    x_line->mesh = new Mesh(BOX_MESH_SOURCE);
-    x_line->material = new Material;
-    x_line->material->diffuse_color = vec3(1, 0, 0);
-    x_line->transform.position = vec3(50, 0, 0);
-    x_line->transform.scale = vec3(104, 0.1, 0.1);
-    scene->add_child(x_line);
-
-    auto *y_line = new Instance;
-    y_line->mesh = new Mesh(BOX_MESH_SOURCE);
-    y_line->material = new Material;
-    y_line->material->diffuse_color = vec3(0, 1, 0);
-    y_line->transform.position = vec3(0, 50, 0);
-    y_line->transform.scale = vec3(0.1, 104, 0.1);
-    scene->add_child(y_line);
-
-    auto *z_line = new Instance;
-    z_line->mesh = new Mesh(BOX_MESH_SOURCE);
-    z_line->material = new Material;
-    z_line->material->diffuse_color = vec3(0, 0, 1);
-    z_line->transform.position = vec3(0, 0, 50);
-    z_line->transform.scale = vec3(0.1, 0.1, 104);
-    scene->add_child(z_line);
 }
 
 void update(float dt) {
@@ -107,26 +57,6 @@ void update(float dt) {
     }
     if(glfwGetKey(window, GLFW_KEY_SPACE)) camera_box->transform.position += vec3(0, 4 * detaTime, 0);
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT))  camera_box->transform.position += vec3(0, -4 * detaTime, 0);
-
-    if(glfwGetKey(window, GLFW_KEY_P)) {
-        for(auto &[box, tar]: boxes){
-            auto pos = box->transform.position + (tar - box->transform.position) * 0.03f;
-            box->transform.position = pos;
-        }
-    }
-    if(glfwGetKey(window, GLFW_KEY_O)) {
-        get_input();
-        int n = 0;
-        for(int i = -4;i <= 4; i++){
-            for(int j = -4;j <= 4; j++){
-                for(int k = -4;k <= 4; k++){
-                    boxes[n].first->transform.position = vec3(i, j, k);
-                    auto tar = vec4(boxes[n].first->transform.position, 1) * input_transform;
-                    boxes[n++].second = vec3(tar / tar[3]);
-                }
-            }
-        }
-    }
 
     if(glfwGetKey(window, GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(window, GL_TRUE);
 }
